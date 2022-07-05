@@ -7,3 +7,4 @@ coverage.xml
 cc-test-reporter
 .pytest_cache/
 *.sqlite3
+.env
