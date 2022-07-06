@@ -1,12 +1,14 @@
-{% load i18n static bootstrap4 %}
+{% load i18n bootstrap4 %}
 {% get_current_language as LANGUAGE_CODE %}
+
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="{% static 'task_manager/css/bootstrap.min.css' %}">
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
     <title>{% translate 'Hexlet Task Manager' %}</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -50,7 +52,5 @@
             <a target="_blank" href="https://ru.hexlet.io">Hexlet</a>
         </div>
     </footer>
-
-    <script src="{% static 'task_manager/js/bootstrap.bundle.min.js' %}" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
