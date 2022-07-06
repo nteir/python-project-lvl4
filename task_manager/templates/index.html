@@ -1,7 +1,7 @@
-{% extends 'layout.html' %}
+{% extends 'base.html' %}
 {% load i18n %}
 
-{% block main %}
+{% block content %}
     <main role="main" class="container wrapper flex-grow-1">
         <div class="card-body p-5 bg-light mt-5">
             <h1>{% translate 'Hello from Hexlet' %}</h1>
@@ -10,4 +10,4 @@
             <a class="btn btn-lg btn-primary" href="https://ru.hexlet.io/" role="button">{% translate 'Learn more' %}</a>
         </div>
     </main>
-{% endblock main %}
+{% endblock content %}
