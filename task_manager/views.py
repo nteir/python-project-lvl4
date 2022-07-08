@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
-from django.views.generic.edit import FormView
+# from django.views.generic.edit import FormView
+from django.views.generic.edit import CreateView
 # from django.contrib.auth.forms import UserCreationForm
 # from django.utils.translation import gettext
 from django.urls import reverse_lazy
@@ -22,15 +23,23 @@ class UsersView(ListView):
     paginate_by = 10
 
 
-class UserCreateView(FormView):
-    
-    form_class = SignUpForm
-    success_url = reverse_lazy('login')
-    template_name = "register.html"
+class UserCreateView(CreateView):
 
-    def form_valid(self, form):
-        form.save()
-        return super(UserCreateView, self).form_valid(form)
+    model = User
+    form_class = SignUpForm
+    template_name = "register.html"
+    success_url = reverse_lazy('login')
+
+
+# class UserCreateView(FormView):
+    
+#     form_class = SignUpForm
+#     success_url = reverse_lazy('login')
+#     template_name = "register.html"
+
+#     def form_valid(self, form):
+#         form.save()
+#         return super(UserCreateView, self).form_valid(form)
 
 
 class LoginView(TemplateView):
