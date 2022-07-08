@@ -2,7 +2,7 @@
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, AccessMixin
 from django.utils.translation import gettext as _
@@ -61,6 +61,7 @@ class UserUpdateView(
     FailedAccessMixin,
     UpdateView
     ):
+
     model = User
     template_name = "register.html"
     form_class = SignUpForm
@@ -79,8 +80,29 @@ class UserUpdateView(
         return context
 
 
-class UserDeleteView(TemplateView):
-    pass
+class UserDeleteView(
+    SuccessMessageMixin,
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    FailedAccessMixin,
+    DeleteView
+    ):
+    
+    model = User
+    template_name = "delete.html"
+    success_url = reverse_lazy('users')
+    redirect_url = reverse_lazy('users')
+    success_message = _("Пользователь успешно удалён")
+    error_message = _("У вас нет прав для изменения другого пользователя.")
+
+    def test_func(self):
+        return self.request.user == self.get_object()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = _('Удаление пользователя')
+        context['button_text'] = _('Да, удалить')
+        return context
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
