@@ -4,11 +4,14 @@ from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, AccessMixin
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
 from django.contrib import messages
 from .forms import SignUpForm, LoginForm
+from .custom_objects import FailedAccessMixin
 from django.contrib.messages.views import SuccessMessageMixin
+
 
 
 class HomeView(TemplateView):
@@ -21,6 +24,7 @@ class UsersView(ListView):
     template_name = "users.html"
     model = User
     context_object_name = 'users'
+    ordering = ['id']
     paginate_by = 10
 
 
@@ -32,6 +36,12 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('login')
     success_message = _("Пользователь успешно зарегистрирован")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = _('Sign up')
+        context['button_text'] = _('Sign up')
+        return context
+
 
 # class UserCreateView(FormView):
     
@@ -42,6 +52,35 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 #     def form_valid(self, form):
 #         form.save()
 #         return super(UserCreateView, self).form_valid(form)
+
+
+class UserUpdateView(
+    SuccessMessageMixin,
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    FailedAccessMixin,
+    UpdateView
+    ):
+    model = User
+    template_name = "register.html"
+    form_class = SignUpForm
+    success_url = reverse_lazy('users')
+    redirect_url = reverse_lazy('users')
+    success_message = _("Пользователь успешно изменён")
+    error_message = _("У вас нет прав для изменения другого пользователя.")
+
+    def test_func(self):
+        return self.request.user == self.get_object()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = _('Update user')
+        context['button_text'] = _('Update')
+        return context
+
+
+class UserDeleteView(TemplateView):
+    pass
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
