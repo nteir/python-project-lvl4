@@ -3,11 +3,12 @@ from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 # from django.views.generic.edit import FormView
 from django.views.generic.edit import CreateView
+from django.contrib.auth.views import LoginView, LogoutView
 # from django.contrib.auth.forms import UserCreationForm
 # from django.utils.translation import gettext
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-from .forms import SignUpForm
+from .forms import SignUpForm, LoginForm
 
 
 class HomeView(TemplateView):
@@ -42,15 +43,15 @@ class UserCreateView(CreateView):
 #         return super(UserCreateView, self).form_valid(form)
 
 
-class LoginView(TemplateView):
+class UserLoginView(LoginView):
     
+    model = User
+    form_class = LoginForm
     template_name = "login.html"
+    redirect_authenticated_user = True
+    success_url = reverse_lazy('home')
 
-    def post(self, *args, **kwargs):
-        pass
 
-
-class LogoutView(TemplateView):
+class UserLogoutView(LogoutView):
     
-    def post(self, *args, **kwargs):
-        pass
+    next_page = reverse_lazy('home')

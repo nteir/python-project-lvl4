@@ -23,6 +23,6 @@ urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
     path('users/', views.UsersView.as_view(), name='users'),
     path('users/create/', views.UserCreateView.as_view(), name='signup'),
-    path('login/', views.LoginView.as_view(), name='login'),
-    path('logout/', views.LogoutView.as_view(), name='logout'),
+    path('login/', views.UserLoginView.as_view(), name='login'),
+    path('logout/', views.UserLogoutView.as_view(), name='logout'),
 ]
