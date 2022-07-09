@@ -13,12 +13,12 @@ import task_manager.text_constants as txt
 
 
 class HomeView(TemplateView):
-    
+
     template_name = "index.html"
 
 
 class UsersView(ListView):
-    
+
     template_name = "users.html"
     model = User
     context_object_name = 'users'
@@ -35,7 +35,11 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     success_message = txt.SIGNUP_SUCSESS
 
     def get_context_data(self, **kwargs):
-        return get_form_context(txt.SIGNUP_TITLE, txt.SIGNUP_BTN, self, **kwargs)
+        return get_form_context(
+            txt.SIGNUP_TITLE,
+            txt.SIGNUP_BTN, self,
+            **kwargs
+        )
 
 
 class UserUpdateView(
@@ -44,7 +48,7 @@ class UserUpdateView(
     UserPassesTestMixin,
     FailedAccessMixin,
     UpdateView
-    ):
+):
 
     model = User
     template_name = "register.html"
@@ -58,7 +62,11 @@ class UserUpdateView(
         return self.request.user == self.get_object()
 
     def get_context_data(self, **kwargs):
-        return get_form_context(txt.UPDATE_TITLE, txt.UPDATE_BTN, self, **kwargs)
+        return get_form_context(
+            txt.UPDATE_TITLE,
+            txt.UPDATE_BTN, self,
+            **kwargs
+        )
 
 
 class UserDeleteView(
@@ -67,8 +75,8 @@ class UserDeleteView(
     UserPassesTestMixin,
     FailedAccessMixin,
     DeleteView
-    ):
-    
+):
+
     model = User
     template_name = "delete.html"
     success_url = reverse_lazy('users')
@@ -78,13 +86,17 @@ class UserDeleteView(
 
     def test_func(self):
         return self.request.user == self.get_object()
-    
+
     def get_context_data(self, **kwargs):
-        return get_form_context(txt.DELETE_TITLE, txt.DELETE_BTN, self, **kwargs)
+        return get_form_context(
+            txt.DELETE_TITLE,
+            txt.DELETE_BTN, self,
+            **kwargs
+        )
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
-    
+
     model = User
     form_class = LoginForm
     template_name = "login.html"
@@ -94,9 +106,9 @@ class UserLoginView(SuccessMessageMixin, LoginView):
 
 
 class UserLogoutView(LogoutView):
-    
+
     next_page = reverse_lazy('home')
-    
+
     def dispatch(self, request, *args, **kwargs):
         messages.info(self.request, txt.LOGOUT_SUCSESS)
         return super().dispatch(request, *args, **kwargs)
