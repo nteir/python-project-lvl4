@@ -16,8 +16,8 @@ lint:
 test:
 	poetry run python manage.py test
 
-test-coverage: 
+test-cov: 
 	poetry run coverage run manage.py test
 	poetry run coverage xml
 
-.PHONY: runserver makemessages requirements lint test test-coverage
+.PHONY: runserver makemessages requirements lint test test-cov
