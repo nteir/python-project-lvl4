@@ -1,17 +1,15 @@
-# from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, AccessMixin
-from django.utils.translation import gettext as _
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from .custom_objects import FailedAccessMixin
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .forms import SignUpForm, LoginForm
-from .custom_objects import FailedAccessMixin
 from django.contrib.messages.views import SuccessMessageMixin
-
+from .forms import SignUpForm, LoginForm
+import task_manager.text_constants as txt
 
 
 class HomeView(TemplateView):
@@ -25,7 +23,7 @@ class UsersView(ListView):
     model = User
     context_object_name = 'users'
     ordering = ['id']
-    paginate_by = 10
+    paginate_by = 20
 
 
 class UserCreateView(SuccessMessageMixin, CreateView):
@@ -34,24 +32,13 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     form_class = SignUpForm
     template_name = "register.html"
     success_url = reverse_lazy('login')
-    success_message = _("Пользователь успешно зарегистрирован")
+    success_message = txt.SIGNUP_SUCSESS
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = _('Sign up')
-        context['button_text'] = _('Sign up')
+        context['title'] = txt.SIGNUP_TITLE
+        context['button_text'] = txt.SIGNUP_BTN
         return context
-
-
-# class UserCreateView(FormView):
-    
-#     form_class = SignUpForm
-#     success_url = reverse_lazy('login')
-#     template_name = "register.html"
-
-#     def form_valid(self, form):
-#         form.save()
-#         return super(UserCreateView, self).form_valid(form)
 
 
 class UserUpdateView(
@@ -67,16 +54,16 @@ class UserUpdateView(
     form_class = SignUpForm
     success_url = reverse_lazy('users')
     redirect_url = reverse_lazy('users')
-    success_message = _("Пользователь успешно изменён")
-    error_message = _("У вас нет прав для изменения другого пользователя.")
+    success_message = txt.UPDATE_USER_SUCSESS
+    error_message = txt.UPDATE_USER_FAIL
 
     def test_func(self):
         return self.request.user == self.get_object()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = _('Update user')
-        context['button_text'] = _('Update')
+        context['title'] = txt.UPDATE_TITLE
+        context['button_text'] = txt.UPDATE_BTN
         return context
 
 
@@ -92,16 +79,16 @@ class UserDeleteView(
     template_name = "delete.html"
     success_url = reverse_lazy('users')
     redirect_url = reverse_lazy('users')
-    success_message = _("Пользователь успешно удалён")
-    error_message = _("У вас нет прав для изменения другого пользователя.")
+    success_message = txt.DELETE_USER_SUCSESS
+    error_message = txt.DELETE_USER_FAIL
 
     def test_func(self):
         return self.request.user == self.get_object()
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = _('Удаление пользователя')
-        context['button_text'] = _('Да, удалить')
+        context['title'] = txt.DELETE_TITLE
+        context['button_text'] = txt.DELETE_BTN
         return context
 
 
@@ -112,7 +99,7 @@ class UserLoginView(SuccessMessageMixin, LoginView):
     template_name = "login.html"
     redirect_authenticated_user = True
     success_url = reverse_lazy('home')
-    success_message = _("Вы залогинены")
+    success_message = txt.LOGIN_SUCSESS
 
 
 class UserLogoutView(LogoutView):
@@ -120,5 +107,5 @@ class UserLogoutView(LogoutView):
     next_page = reverse_lazy('home')
     
     def dispatch(self, request, *args, **kwargs):
-        messages.info(self.request, _("Вы разлогинены"))
+        messages.info(self.request, txt.LOGOUT_SUCSESS)
         return super().dispatch(request, *args, **kwargs)
