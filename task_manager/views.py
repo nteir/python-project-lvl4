@@ -35,10 +35,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     success_message = txt.SIGNUP_SUCSESS
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = txt.SIGNUP_TITLE
-        context['button_text'] = txt.SIGNUP_BTN
-        return context
+        return get_form_context(txt.SIGNUP_TITLE, txt.SIGNUP_BTN, self, **kwargs)
 
 
 class UserUpdateView(
@@ -61,10 +58,7 @@ class UserUpdateView(
         return self.request.user == self.get_object()
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = txt.UPDATE_TITLE
-        context['button_text'] = txt.UPDATE_BTN
-        return context
+        return get_form_context(txt.UPDATE_TITLE, txt.UPDATE_BTN, self, **kwargs)
 
 
 class UserDeleteView(
@@ -86,10 +80,7 @@ class UserDeleteView(
         return self.request.user == self.get_object()
     
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = txt.DELETE_TITLE
-        context['button_text'] = txt.DELETE_BTN
-        return context
+        return get_form_context(txt.DELETE_TITLE, txt.DELETE_BTN, self, **kwargs)
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
@@ -109,3 +100,10 @@ class UserLogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
         messages.info(self.request, txt.LOGOUT_SUCSESS)
         return super().dispatch(request, *args, **kwargs)
+
+
+def get_form_context(title, btn, obj, **kwargs):
+    context = super(obj.__class__, obj).get_context_data(**kwargs)
+    context['title'] = title
+    context['button_text'] = btn
+    return context
