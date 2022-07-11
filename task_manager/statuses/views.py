@@ -45,3 +45,46 @@ class StatusCreateView(
             txt.CREATE_BTN, self,
             **kwargs
         )
+
+
+class StatusUpdateView(
+    SuccessMessageMixin,
+    LoginRequiredMixin,
+    FailedAccessMixin,
+    UpdateView
+):
+    model = TaskStatus
+    form_class = StatusCreateForm
+    template_name = "form.html"
+    success_url = reverse_lazy('status_list')
+    redirect_url = reverse_lazy('login')
+    success_message = txt.UPDATE_STATUS_SUCSESS
+    error_message = txt.NOT_LOGGED_IN
+
+    def get_context_data(self, **kwargs):
+        return get_form_context(
+            txt.UPDATE_TITLE,
+            txt.UPDATE_BTN, self,
+            **kwargs
+        )
+
+
+class StatusDeleteView(
+    SuccessMessageMixin,
+    LoginRequiredMixin,
+    FailedAccessMixin,
+    DeleteView
+):
+    model = TaskStatus
+    template_name = "delete.html"
+    success_url = reverse_lazy('status_list')
+    redirect_url = reverse_lazy('login')
+    success_message = txt.DELETE_STATUS_SUCSESS
+    error_message = txt.NOT_LOGGED_IN
+
+    def get_context_data(self, **kwargs):
+        return get_form_context(
+            txt.DELETE_TITLE,
+            txt.DELETE_BTN, self,
+            **kwargs
+        )

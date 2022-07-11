@@ -8,8 +8,10 @@
     <p>{% translate "Are you sure you want to delete" %}
         {% if object.first_name %}
             {{ object.first_name }} {{ object.last_name }}
-        {% else %}
+        {% elif object.username %}
             {{ object.username }}
+        {% else %}
+            {{ object.name }}
         {% endif %} ?</p>
     <form method="post">
         {% csrf_token %}
