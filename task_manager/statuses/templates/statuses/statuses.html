@@ -5,7 +5,7 @@
 <main role="main" class="container wrapper flex-grow-1">
     {% include 'messages.html' %}
     <h1 class="my-4">{% translate 'Statuses' %}</h1>
-    <a class="nav-link" href="{% url 'status_create' %}">New status</a>
+    <a class="nav-link" href="{% url 'status_create' %}">{% translate 'New status' %}</a>
     <table class="table table-striped">
         <thead>
             <tr>

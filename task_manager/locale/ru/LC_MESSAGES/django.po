@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-09 10:46+0300\n"
+"POT-Creation-Date: 2022-07-11 16:33+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,83 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: statuses/templates/statuses/statuses.html:7 templates/navbar.html:16
+msgid "Statuses"
+msgstr "Статусы"
+
+#: statuses/templates/statuses/statuses.html:8
+#, fuzzy
+#| msgid "Create status"
+msgid "New status"
+msgstr "Создать статус"
+
+#: statuses/templates/statuses/statuses.html:13
+#, fuzzy
+#| msgid "Full Name"
+msgid "Name"
+msgstr "Полное имя"
+
+#: statuses/templates/statuses/statuses.html:14
+#, fuzzy
+#| msgid "Date Joined"
+msgid "Date Created"
+msgstr "Дата создания"
+
+#: statuses/templates/statuses/statuses.html:25 statuses/text_constants.py:7
+#: templates/users.html:26 text_constants.py:7
+msgid "Update"
+msgstr "Изменить"
+
+#: statuses/templates/statuses/statuses.html:26 templates/users.html:27
+msgid "Delete"
+msgstr "Удалить"
+
+#: statuses/text_constants.py:4
+msgid "Create status"
+msgstr "Создать статус"
+
+#: statuses/text_constants.py:5
+msgid "Create"
+msgstr "Создать"
+
+#: statuses/text_constants.py:6
+#, fuzzy
+#| msgid "Update user"
+msgid "Update status"
+msgstr "Изменение пользователя"
+
+#: statuses/text_constants.py:8
+#, fuzzy
+#| msgid "Delete user"
+msgid "Delete status"
+msgstr "Удаление пользователя"
+
+#: statuses/text_constants.py:9 text_constants.py:9
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: statuses/text_constants.py:12
+msgid "You are not authorized! Please log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: statuses/text_constants.py:13
+#, fuzzy
+#| msgid "The user is created."
+msgid "The status is created."
+msgstr "Пользователь успешно зарегистрирован"
+
+#: statuses/text_constants.py:14
+#, fuzzy
+#| msgid "The user is updated."
+msgid "The status is updated."
+msgstr "Пользователь успешно изменён"
+
+#: statuses/text_constants.py:15
+#, fuzzy
+#| msgid "The user is deleted."
+msgid "The status is deleted."
+msgstr "Пользователь успешно удалён"
 
 #: templates/base.html:12
 msgid "Hexlet Task Manager"
@@ -40,7 +117,7 @@ msgstr "Практические курсы по программировани�
 msgid "Learn more"
 msgstr "Узнать больше"
 
-#: templates/login.html:7 templates/login.html:12 templates/navbar.html:29
+#: templates/login.html:7 templates/login.html:12 templates/navbar.html:34
 msgid "Sign in"
 msgstr "Вход"
 
@@ -48,15 +125,15 @@ msgstr "Вход"
 msgid "Task Manager"
 msgstr "Менеджер задач"
 
-#: templates/navbar.html:12
+#: templates/navbar.html:12 templates/users.html:7
 msgid "Users"
 msgstr "Пользователи"
 
-#: templates/navbar.html:25
+#: templates/navbar.html:30
 msgid "Log out"
 msgstr "Выход"
 
-#: templates/navbar.html:32 text_constants.py:5
+#: templates/navbar.html:37 text_constants.py:5
 msgid "Sign up"
 msgstr "Регистрация"
 
@@ -73,14 +150,6 @@ msgstr "Полное имя"
 #: templates/users.html:14
 msgid "Date Joined"
 msgstr "Дата создания"
-
-#: templates/users.html:26 text_constants.py:7
-msgid "Update"
-msgstr "Изменить"
-
-#: templates/users.html:27
-msgid "Delete"
-msgstr "Удалить"
 
 #: templates/users.html:39 templates/users.html:45
 msgid "Previous"
@@ -101,10 +170,6 @@ msgstr "Изменение пользователя"
 #: text_constants.py:8
 msgid "Delete user"
 msgstr "Удаление пользователя"
-
-#: text_constants.py:9
-msgid "Yes, delete"
-msgstr "Да, удалить"
 
 #: text_constants.py:12
 msgid "You are logged in."
