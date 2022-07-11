@@ -7,6 +7,12 @@ makemessages:
 compilemessages:
 	poetry run django-admin compilemessages
 
+migrations:
+	poetry run python manage.py makemigrations
+
+migrate:
+	poetry run python manage.py migrate
+
 requirements:
 	poetry export -f requirements.txt -o requirements.txt --without-hashes
 
@@ -20,4 +26,4 @@ test-cov:
 	poetry run coverage run manage.py test
 	poetry run coverage xml
 
-.PHONY: runserver makemessages requirements lint test test-cov
+.PHONY: runserver makemessages compilemessages migrations migrate requirements lint test test-cov

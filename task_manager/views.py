@@ -30,7 +30,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 
     model = User
     form_class = SignUpForm
-    template_name = "register.html"
+    template_name = "form.html"
     success_url = reverse_lazy('login')
     success_message = txt.SIGNUP_SUCSESS
 
@@ -51,7 +51,7 @@ class UserUpdateView(
 ):
 
     model = User
-    template_name = "register.html"
+    template_name = "form.html"
     form_class = SignUpForm
     success_url = reverse_lazy('users')
     redirect_url = reverse_lazy('users')

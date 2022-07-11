@@ -11,6 +11,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'users' %}">{% translate 'Users' %}</a>
                 </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'status_list' %}">{% translate 'Statuses' %}</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
         <div class="collapse navbar-collapse" id="navbarNav">
