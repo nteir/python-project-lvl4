@@ -8,7 +8,7 @@ compilemessages:
 	poetry run django-admin compilemessages
 
 requirements:
-	poetry export -f requirements.txt -o requirements.txt
+	poetry export -f requirements.txt -o requirements.txt --without-hashes
 
 lint:
 	poetry run flake8 task_manager
