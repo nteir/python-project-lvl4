@@ -1,0 +1,18 @@
+[
+{
+    "model": "statuses.taskstatus",
+    "pk": 1,
+    "fields": {
+        "name": "todo",
+        "date_created": "2022-07-11T10:38:06.789Z"
+    }
+},
+{
+    "model": "statuses.taskstatus",
+    "pk": 2,
+    "fields": {
+        "name": "postpone",
+        "date_created": "2022-07-11T12:25:03.986Z"
+    }
+}
+]
