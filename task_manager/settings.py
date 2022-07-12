@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'task_manager',
     'task_manager.statuses',
+    'task_manager.tasks',
 ]
 
 MIDDLEWARE = [
@@ -135,7 +136,6 @@ LANGUAGES = [
 ]
 
 LOCALE_PATHS = [
-    # os.path.join(BASE_DIR, 'task_manager', 'locale'),
     'locale',
 ]
 

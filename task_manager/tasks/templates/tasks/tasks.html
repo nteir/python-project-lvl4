@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<main role="main" class="container wrapper flex-grow-1">
+    {% include 'messages.html' %}
+    <h1 class="my-4">{% translate 'Tasks' %}</h1>
+    <a class="nav-link" href="{% url 'task_create' %}">{% translate 'New task' %}</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">{% translate 'Name' %}</th>
+                <th scope="col">{% translate 'Status' %}</th>
+                <th scope="col">{% translate 'Author' %}</th>
+                <th scope="col">{% translate 'Executor' %}</th>
+                <th scope="col">{% translate 'Date Created' %}</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <th scope="row">{{task.id}}</th>
+                <td>{{task.name}}</td>
+                <td>{{task.status}}</td>
+                <td>{{task.author}}</td>
+                <td>{{task.executor}}</td>
+                <td>{{task.date_created}}</td>
+                <td>
+                    <a href="{% url 'status_update' task.id %}">{% translate 'Update' %}</a>
+                    <br/><a href="{% url 'status_delete' task.id %}">{% translate 'Delete' %}</a>
+                </td>
+            </tr>              
+            {% endfor %}
+        </tbody>            
+    </table>        
+</main>
+{% endblock content %}
