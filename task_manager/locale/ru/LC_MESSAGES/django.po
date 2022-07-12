@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-11 16:33+0300\n"
+"POT-Creation-Date: 2022-07-11 17:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,177 +20,163 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: statuses/templates/statuses/statuses.html:7 templates/navbar.html:16
+#: task_manager/statuses/templates/statuses/statuses.html:7
+#: task_manager/templates/navbar.html:16
 msgid "Statuses"
 msgstr "Статусы"
 
-#: statuses/templates/statuses/statuses.html:8
-#, fuzzy
-#| msgid "Create status"
+#: task_manager/statuses/templates/statuses/statuses.html:8
 msgid "New status"
 msgstr "Создать статус"
 
-#: statuses/templates/statuses/statuses.html:13
-#, fuzzy
-#| msgid "Full Name"
+#: task_manager/statuses/templates/statuses/statuses.html:13
 msgid "Name"
-msgstr "Полное имя"
+msgstr "Имя"
 
-#: statuses/templates/statuses/statuses.html:14
-#, fuzzy
-#| msgid "Date Joined"
+#: task_manager/statuses/templates/statuses/statuses.html:14
 msgid "Date Created"
 msgstr "Дата создания"
 
-#: statuses/templates/statuses/statuses.html:25 statuses/text_constants.py:7
-#: templates/users.html:26 text_constants.py:7
+#: task_manager/statuses/templates/statuses/statuses.html:25
+#: task_manager/statuses/text_constants.py:7
+#: task_manager/templates/users.html:26 task_manager/text_constants.py:7
 msgid "Update"
 msgstr "Изменить"
 
-#: statuses/templates/statuses/statuses.html:26 templates/users.html:27
+#: task_manager/statuses/templates/statuses/statuses.html:26
+#: task_manager/templates/users.html:27
 msgid "Delete"
 msgstr "Удалить"
 
-#: statuses/text_constants.py:4
+#: task_manager/statuses/text_constants.py:4
 msgid "Create status"
 msgstr "Создать статус"
 
-#: statuses/text_constants.py:5
+#: task_manager/statuses/text_constants.py:5
 msgid "Create"
 msgstr "Создать"
 
-#: statuses/text_constants.py:6
-#, fuzzy
-#| msgid "Update user"
+#: task_manager/statuses/text_constants.py:6
 msgid "Update status"
-msgstr "Изменение пользователя"
+msgstr "Изменение статуса"
 
-#: statuses/text_constants.py:8
-#, fuzzy
-#| msgid "Delete user"
+#: task_manager/statuses/text_constants.py:8
 msgid "Delete status"
-msgstr "Удаление пользователя"
+msgstr "Удаление статуса"
 
-#: statuses/text_constants.py:9 text_constants.py:9
+#: task_manager/statuses/text_constants.py:9 task_manager/text_constants.py:9
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
-#: statuses/text_constants.py:12
+#: task_manager/statuses/text_constants.py:12
 msgid "You are not authorized! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: statuses/text_constants.py:13
-#, fuzzy
-#| msgid "The user is created."
+#: task_manager/statuses/text_constants.py:13
 msgid "The status is created."
-msgstr "Пользователь успешно зарегистрирован"
+msgstr "Статус успешно создан"
 
-#: statuses/text_constants.py:14
-#, fuzzy
-#| msgid "The user is updated."
+#: task_manager/statuses/text_constants.py:14
 msgid "The status is updated."
-msgstr "Пользователь успешно изменён"
+msgstr "Статус успешно изменён"
 
-#: statuses/text_constants.py:15
-#, fuzzy
-#| msgid "The user is deleted."
+#: task_manager/statuses/text_constants.py:15
 msgid "The status is deleted."
-msgstr "Пользователь успешно удалён"
+msgstr "Статус успешно удалён"
 
-#: templates/base.html:12
+#: task_manager/templates/base.html:12
 msgid "Hexlet Task Manager"
 msgstr "Менеджер задач Hexlet"
 
-#: templates/delete.html:8
+#: task_manager/templates/delete.html:8
 msgid "Are you sure you want to delete"
 msgstr "Вы уверены, что хотите удалить"
 
-#: templates/index.html:8
+#: task_manager/templates/index.html:8
 msgid "Hello from Hexlet"
 msgstr "Привет от Хекслета!"
 
-#: templates/index.html:9
+#: task_manager/templates/index.html:9
 msgid "Practical coding learning courses."
 msgstr "Практические курсы по программированию"
 
-#: templates/index.html:11
+#: task_manager/templates/index.html:11
 msgid "Learn more"
 msgstr "Узнать больше"
 
-#: templates/login.html:7 templates/login.html:12 templates/navbar.html:34
+#: task_manager/templates/login.html:7 task_manager/templates/login.html:12
+#: task_manager/templates/navbar.html:34
 msgid "Sign in"
 msgstr "Вход"
 
-#: templates/navbar.html:5
+#: task_manager/templates/navbar.html:5
 msgid "Task Manager"
 msgstr "Менеджер задач"
 
-#: templates/navbar.html:12 templates/users.html:7
+#: task_manager/templates/navbar.html:12 task_manager/templates/users.html:7
 msgid "Users"
 msgstr "Пользователи"
 
-#: templates/navbar.html:30
+#: task_manager/templates/navbar.html:30
 msgid "Log out"
 msgstr "Выход"
 
-#: templates/navbar.html:37 text_constants.py:5
+#: task_manager/templates/navbar.html:37 task_manager/text_constants.py:5
 msgid "Sign up"
 msgstr "Регистрация"
 
-#: templates/users.html:12
-#, fuzzy
-#| msgid "Users"
+#: task_manager/templates/users.html:12
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: templates/users.html:13
+#: task_manager/templates/users.html:13
 msgid "Full Name"
 msgstr "Полное имя"
 
-#: templates/users.html:14
+#: task_manager/templates/users.html:14
 msgid "Date Joined"
 msgstr "Дата создания"
 
-#: templates/users.html:39 templates/users.html:45
+#: task_manager/templates/users.html:39 task_manager/templates/users.html:45
 msgid "Previous"
 msgstr "Назад"
 
-#: templates/users.html:59 templates/users.html:65
+#: task_manager/templates/users.html:59 task_manager/templates/users.html:65
 msgid "Next"
 msgstr "Вперёд"
 
-#: text_constants.py:4
+#: task_manager/text_constants.py:4
 msgid "New user sign up"
 msgstr "Регистрация"
 
-#: text_constants.py:6
+#: task_manager/text_constants.py:6
 msgid "Update user"
 msgstr "Изменение пользователя"
 
-#: text_constants.py:8
+#: task_manager/text_constants.py:8
 msgid "Delete user"
 msgstr "Удаление пользователя"
 
-#: text_constants.py:12
+#: task_manager/text_constants.py:12
 msgid "You are logged in."
 msgstr "Вы залогинены"
 
-#: text_constants.py:13
+#: task_manager/text_constants.py:13
 msgid "You are logged out."
 msgstr "Вы разлогинены"
 
-#: text_constants.py:14
+#: task_manager/text_constants.py:14
 msgid "The user is created."
 msgstr "Пользователь успешно зарегистрирован"
 
-#: text_constants.py:15
+#: task_manager/text_constants.py:15
 msgid "The user is updated."
 msgstr "Пользователь успешно изменён"
 
-#: text_constants.py:16 text_constants.py:18
+#: task_manager/text_constants.py:16 task_manager/text_constants.py:18
 msgid "You don't have permissions to edit other users."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: text_constants.py:17
+#: task_manager/text_constants.py:17
 msgid "The user is deleted."
 msgstr "Пользователь успешно удалён"
