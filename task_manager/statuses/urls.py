@@ -3,10 +3,14 @@ from task_manager.statuses import views
 
 urlpatterns = [
     path('', views.StatusListView.as_view(), name='status_list'),
-    path('create/', views.StatusCreateView.as_view(), name='status_create'),
+    path(
+        'create/',
+        views.StatusCreateView.as_view(**views.common_attr),
+        name='status_create'
+    ),
     path(
         '<int:pk>/update/',
-        views.StatusUpdateView.as_view(),
+        views.StatusUpdateView.as_view(**views.common_attr),
         name='status_update'
     ),
     path(
