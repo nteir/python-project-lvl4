@@ -1,10 +1,10 @@
 [
 {
-    "model": "auth.user",
+    "model": "task_manager.user",
     "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$320000$ciBdJSv5SZAfHuyO9tWnX6$q5aM+afhw6MTJSdAzvA5QxrPLS9go/n54Nd6zSkeKIc=",
-        "last_login": "2022-07-09T08:01:33.525Z",
+        "password": "pbkdf2_sha256$320000$bQZIdzmjq1W1WXla58WkG1$99JILh3sQ7tXgHxiVEQufJoSHP+y66qLzzcdp9BeZw4=",
+        "last_login": "2022-07-12T13:00:48.173Z",
         "is_superuser": false,
         "username": "ipetrov",
         "first_name": "Ivan",
@@ -12,25 +12,25 @@
         "email": "",
         "is_staff": false,
         "is_active": true,
-        "date_joined": "2022-07-07T07:56:06.325Z",
+        "date_joined": "2022-07-12T13:00:38.120Z",
         "groups": [],
         "user_permissions": []
     }
 },
 {
-    "model": "auth.user",
+    "model": "task_manager.user",
     "pk": 2,
     "fields": {
-        "password": "pbkdf2_sha256$320000$BCztA4qMvmO4iobHMOiTpN$5SiWUrIrYqssWo6mkr1DMVGzDCG1mAQ0uHA+N1baM48=",
-        "last_login": null,
+        "password": "pbkdf2_sha256$320000$V0mcgRbPDAzNEn3SWxrgt4$IEJY/MwGEuTVQFqY2423UKZ49OTgn5hTLOswPwid4bU=",
+        "last_login": "2022-07-12T13:11:00.105Z",
         "is_superuser": false,
-        "username": "aivanov",
-        "first_name": "Andrey",
-        "last_name": "Ivanov",
+        "username": "afilatov",
+        "first_name": "Alexander",
+        "last_name": "Filatov",
         "email": "",
         "is_staff": false,
         "is_active": true,
-        "date_joined": "2022-07-07T07:57:03.833Z",
+        "date_joined": "2022-07-12T13:10:52.839Z",
         "groups": [],
         "user_permissions": []
     }
