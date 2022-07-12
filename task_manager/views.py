@@ -1,4 +1,6 @@
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+# from task_manager.models import User
+from django.contrib.auth import get_user_model
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -10,6 +12,8 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import SignUpForm, LoginForm
 import task_manager.text_constants as txt
+
+User = get_user_model()
 
 
 class HomeView(TemplateView):
