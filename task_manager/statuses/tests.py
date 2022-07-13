@@ -32,10 +32,10 @@ class StatusesTestCase(TestCase):
         }
         url = reverse('status_create')
         response = self.client.post(url, new_data, follow=True)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(TaskStatus.objects.filter(name='tstatus').count(), 1)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(TaskStatus.objects.filter(name='tstatus').count(), 1)
 
-    def test_user_update(self):
+    def test_status_update(self):
         self.client.force_login(self.user)
         url = reverse('status_update', kwargs={'pk': self.status2.id})
         new_data = {
@@ -43,11 +43,11 @@ class StatusesTestCase(TestCase):
         }
         response = self.client.post(url, new_data, follow=True)
         self.assertRedirects(response, reverse('status_list'))
-        self.assertEquals(TaskStatus.objects.filter(name='tname').count(), 1)
+        self.assertEqual(TaskStatus.objects.filter(name='tname').count(), 1)
 
     def test_status_delete(self):
         self.client.force_login(self.user)
         url = reverse('status_delete', kwargs={'pk': self.status2.id})
         response = self.client.post(url, follow=True)
-        self.assertEquals(TaskStatus.objects.filter(id=self.status2.id).count(), 0)
+        self.assertEqual(TaskStatus.objects.filter(id=self.status2.id).count(), 0)
         self.assertRedirects(response, reverse('status_list'))

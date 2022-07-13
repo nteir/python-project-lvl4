@@ -29,8 +29,8 @@ class UsersTestCase(TestCase):
         }
         url = reverse('signup')
         response = self.client.post(url, new_data, follow=True)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(User.objects.filter(username='tuser').count(), 1)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(User.objects.filter(username='tuser').count(), 1)
 
     def test_user_update(self):
         user = self.user1
@@ -45,14 +45,14 @@ class UsersTestCase(TestCase):
         }
         response = self.client.post(url, new_data, follow=True)
         self.assertRedirects(response, reverse('users'))
-        self.assertEquals(User.objects.filter(last_name='Sidorov').count(), 1)
+        self.assertEqual(User.objects.filter(last_name='Sidorov').count(), 1)
 
     def test_user_delete(self):
         user = self.user1
         self.client.force_login(user)
         url = reverse('delete', kwargs={'pk': user.id})
         response = self.client.post(url, follow=True)
-        self.assertEquals(User.objects.filter(id=self.user1.id).count(), 0)
+        self.assertEqual(User.objects.filter(id=self.user1.id).count(), 0)
         with self.assertRaises(User.DoesNotExist):
             User.objects.get(pk=self.user1.id)
         self.assertRedirects(response, reverse('users'))
