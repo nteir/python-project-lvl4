@@ -55,7 +55,7 @@ class UserUpdateView(CO.CustomEditView, UserPassesTestMixin, UpdateView):
     redirect_url = reverse_lazy('users')
     success_message = txt.UPDATE_USER_SUCSESS
     error_message = txt.UPDATE_USER_FAIL
-    title_text = txt.UPDATE_TITLE
+    title_text = txt.UPDATE_USER_TITLE
     btn_text = txt.UPDATE_BTN
 
     def test_func(self):
@@ -70,7 +70,7 @@ class UserDeleteView(CO.CustomEditView, UserPassesTestMixin, DeleteView):
     redirect_url = reverse_lazy('users')
     success_message = txt.DELETE_USER_SUCSESS
     error_message = txt.DELETE_USER_FAIL
-    title_text = txt.DELETE_TITLE
+    title_text = txt.DELETE_USER_TITLE
     btn_text = txt.DELETE_BTN
 
     def test_func(self):

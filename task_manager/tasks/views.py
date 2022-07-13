@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from .forms import TaskCreateForm
-import task_manager.tasks.text_constants as txt
+import task_manager.text_constants as txt
 import task_manager.custom_objects as CO
 
 # Common attributes for Create and Update Views
@@ -42,7 +42,7 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
 class TaskCreateView(CO.CustomEditView, CreateView):
 
     success_message = txt.CREATE_TASK_SUCSESS
-    title_text = txt.CREATE_TITLE
+    title_text = txt.CREATE_TASK_TITLE
     btn_text = txt.CREATE_BTN
 
     def form_valid(self, form):
@@ -53,7 +53,7 @@ class TaskCreateView(CO.CustomEditView, CreateView):
 class TaskUpdateView(CO.CustomEditView, UpdateView):
 
     success_message = txt.UPDATE_TASK_SUCSESS
-    title_text = txt.UPDATE_TITLE
+    title_text = txt.UPDATE_TASK_TITLE
     btn_text = txt.UPDATE_BTN
 
 
@@ -65,7 +65,7 @@ class TaskDeleteView(CO.CustomEditView, UserPassesTestMixin, DeleteView):
     redirect_url = reverse_lazy('task_list')
     success_message = txt.DELETE_TASK_SUCSESS
     error_message = txt.DELETE_TASK_FAIL
-    title_text = txt.DELETE_TITLE
+    title_text = txt.DELETE_TASK_TITLE
     btn_text = txt.DELETE_BTN
 
     def test_func(self):

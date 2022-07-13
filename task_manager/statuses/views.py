@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .forms import StatusCreateForm
-import task_manager.statuses.text_constants as txt
+import task_manager.text_constants as txt
 from django.db import models
 import task_manager.custom_objects as CO
 
@@ -34,14 +34,14 @@ class StatusListView(CO.FailedAccessMixin, LoginRequiredMixin, ListView):
 class StatusCreateView(CO.CustomEditView, CreateView):
 
     success_message = txt.CREATE_STATUS_SUCSESS
-    title_text = txt.CREATE_TITLE
+    title_text = txt.CREATE_STATUS_TITLE
     btn_text = txt.CREATE_BTN
 
 
 class StatusUpdateView(CO.CustomEditView, UpdateView):
 
     success_message = txt.UPDATE_STATUS_SUCSESS
-    title_text = txt.UPDATE_TITLE
+    title_text = txt.UPDATE_STATUS_TITLE
     btn_text = txt.UPDATE_BTN
 
 
@@ -53,7 +53,7 @@ class StatusDeleteView(CO.CustomEditView, DeleteView):
     redirect_url = reverse_lazy('login')
     success_message = txt.DELETE_STATUS_SUCSESS
     error_message = txt.NOT_LOGGED_IN
-    title_text = txt.DELETE_TITLE
+    title_text = txt.DELETE_STATUS_TITLE
     btn_text = txt.DELETE_BTN
 
     def form_valid(self, form):
