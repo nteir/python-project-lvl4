@@ -3,12 +3,10 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from task_manager.custom_objects import FailedAccessMixin
 from django.urls import reverse_lazy
-from django.contrib.messages.views import SuccessMessageMixin
 from .forms import TaskCreateForm
 import task_manager.tasks.text_constants as txt
-from task_manager.views import get_form_context
+import task_manager.custom_objects as CO
 
 # Common attributes for Create and Update Views
 common_attr = {
@@ -22,7 +20,7 @@ common_attr = {
 
 
 # Create your views here.
-class TaskListView(FailedAccessMixin, LoginRequiredMixin, ListView):
+class TaskListView(CO.FailedAccessMixin, LoginRequiredMixin, ListView):
 
     model = Task
     template_name = "tasks/tasks.html"
@@ -41,53 +39,25 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
     error_message = txt.NOT_LOGGED_IN
 
 
-class TaskCreateView(
-    SuccessMessageMixin,
-    FailedAccessMixin,
-    LoginRequiredMixin,
-    CreateView
-):
+class TaskCreateView(CO.CustomEditView, CreateView):
 
     success_message = txt.CREATE_TASK_SUCSESS
+    title_text = txt.CREATE_TITLE
+    btn_text = txt.CREATE_BTN
 
     def form_valid(self, form):
         form.instance.author_id = self.request.user.id
         return super().form_valid(form)
 
-    def get_context_data(self, **kwargs):
-        return get_form_context(
-            txt.CREATE_TITLE,
-            txt.CREATE_BTN,
-            self,
-            **kwargs
-        )
 
-
-class TaskUpdateView(
-    SuccessMessageMixin,
-    LoginRequiredMixin,
-    FailedAccessMixin,
-    UpdateView
-):
+class TaskUpdateView(CO.CustomEditView, UpdateView):
 
     success_message = txt.UPDATE_TASK_SUCSESS
-
-    def get_context_data(self, **kwargs):
-        return get_form_context(
-            txt.UPDATE_TITLE,
-            txt.UPDATE_BTN,
-            self,
-            **kwargs
-        )
+    title_text = txt.UPDATE_TITLE
+    btn_text = txt.UPDATE_BTN
 
 
-class TaskDeleteView(
-    SuccessMessageMixin,
-    LoginRequiredMixin,
-    UserPassesTestMixin,
-    FailedAccessMixin,
-    DeleteView
-):
+class TaskDeleteView(CO.CustomEditView, UserPassesTestMixin, DeleteView):
 
     model = Task
     template_name = "delete.html"
@@ -95,13 +65,8 @@ class TaskDeleteView(
     redirect_url = reverse_lazy('task_list')
     success_message = txt.DELETE_TASK_SUCSESS
     error_message = txt.DELETE_TASK_FAIL
+    title_text = txt.DELETE_TITLE
+    btn_text = txt.DELETE_BTN
 
     def test_func(self):
         return self.request.user == self.get_object().author
-
-    def get_context_data(self, **kwargs):
-        return get_form_context(
-            txt.DELETE_TITLE,
-            txt.DELETE_BTN, self,
-            **kwargs
-        )

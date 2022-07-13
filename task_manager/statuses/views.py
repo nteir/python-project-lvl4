@@ -2,13 +2,12 @@ from .models import TaskStatus
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from task_manager.custom_objects import FailedAccessMixin
 from django.urls import reverse_lazy
-from django.contrib.messages.views import SuccessMessageMixin
 from .forms import StatusCreateForm
 import task_manager.statuses.text_constants as txt
-from task_manager.views import get_form_context
 from django.db import models
+import task_manager.custom_objects as CO
+
 
 # Common attributes for Create and Update Views
 common_attr = {
@@ -22,7 +21,7 @@ common_attr = {
 
 
 # Create your views here.
-class StatusListView(FailedAccessMixin, LoginRequiredMixin, ListView):
+class StatusListView(CO.FailedAccessMixin, LoginRequiredMixin, ListView):
 
     model = TaskStatus
     template_name = "statuses/statuses.html"
@@ -32,52 +31,30 @@ class StatusListView(FailedAccessMixin, LoginRequiredMixin, ListView):
     error_message = txt.NOT_LOGGED_IN
 
 
-class StatusCreateView(
-    SuccessMessageMixin,
-    FailedAccessMixin,
-    LoginRequiredMixin,
-    CreateView
-):
+class StatusCreateView(CO.CustomEditView, CreateView):
 
     success_message = txt.CREATE_STATUS_SUCSESS
-
-    def get_context_data(self, **kwargs):
-        return get_form_context(
-            txt.CREATE_TITLE,
-            txt.CREATE_BTN, self,
-            **kwargs
-        )
+    title_text = txt.CREATE_TITLE
+    btn_text = txt.CREATE_BTN
 
 
-class StatusUpdateView(
-    SuccessMessageMixin,
-    LoginRequiredMixin,
-    FailedAccessMixin,
-    UpdateView
-):
+class StatusUpdateView(CO.CustomEditView, UpdateView):
 
     success_message = txt.UPDATE_STATUS_SUCSESS
-
-    def get_context_data(self, **kwargs):
-        return get_form_context(
-            txt.UPDATE_TITLE,
-            txt.UPDATE_BTN, self,
-            **kwargs
-        )
+    title_text = txt.UPDATE_TITLE
+    btn_text = txt.UPDATE_BTN
 
 
-class StatusDeleteView(
-    SuccessMessageMixin,
-    LoginRequiredMixin,
-    FailedAccessMixin,
-    DeleteView
-):
+class StatusDeleteView(CO.CustomEditView, DeleteView):
+
     model = TaskStatus
     template_name = "delete.html"
     success_url = reverse_lazy('status_list')
     redirect_url = reverse_lazy('login')
     success_message = txt.DELETE_STATUS_SUCSESS
     error_message = txt.NOT_LOGGED_IN
+    title_text = txt.DELETE_TITLE
+    btn_text = txt.DELETE_BTN
 
     def form_valid(self, form):
         try:
@@ -89,10 +66,3 @@ class StatusDeleteView(
             self.redirect_url = reverse_lazy('status_list')
             messages.error(self.request, self.error_message)
             return HttpResponseRedirect(self.redirect_url)
-
-    def get_context_data(self, **kwargs):
-        return get_form_context(
-            txt.DELETE_TITLE,
-            txt.DELETE_BTN, self,
-            **kwargs
-        )
