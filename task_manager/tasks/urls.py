@@ -10,12 +10,12 @@ urlpatterns = [
     ),
     path(
         'create/',
-        views.TaskCreateView.as_view(),
+        views.TaskCreateView.as_view(**views.common_attr),
         name='task_create'
     ),
     path(
         '<int:pk>/update/',
-        views.TaskUpdateView.as_view(),
+        views.TaskUpdateView.as_view(**views.common_attr),
         name='task_update'
     ),
     path(
