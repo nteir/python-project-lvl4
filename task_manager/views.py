@@ -1,5 +1,3 @@
-# from django.contrib.auth.models import User
-# from task_manager.models import User
 from django.contrib.auth import get_user_model
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
@@ -12,6 +10,7 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import SignUpForm, LoginForm
 import task_manager.text_constants as txt
+from django.db import models
 
 User = get_user_model()
 
@@ -91,6 +90,16 @@ class UserDeleteView(
     def test_func(self):
         return self.request.user == self.get_object()
 
+    def form_valid(self, form):
+        try:
+            return super().form_valid(form)
+        except models.ProtectedError:
+            from django.shortcuts import HttpResponseRedirect
+            self.error_message = txt.USER_IN_USE
+            self.redirect_url = reverse_lazy('users')
+            messages.error(self.request, self.error_message)
+            return HttpResponseRedirect(self.redirect_url)
+    
     def get_context_data(self, **kwargs):
         return get_form_context(
             txt.DELETE_TITLE,

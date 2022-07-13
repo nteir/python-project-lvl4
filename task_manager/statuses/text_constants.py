@@ -10,6 +10,7 @@ DELETE_BTN = _('Yes, delete')
 
 # Messages
 NOT_LOGGED_IN = _('You are not authorized! Please log in.')
+STATUS_IN_USE = _('Can\'t delete the status because it\'s in use')
 CREATE_STATUS_SUCSESS = _('The status is created.')
 UPDATE_STATUS_SUCSESS = _('The status is updated.')
 DELETE_STATUS_SUCSESS = _('The status is deleted.')

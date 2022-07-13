@@ -1,6 +1,4 @@
 from django.db import models
-# from django.contrib.auth.models import User
-# from task_manager.models import User
 from django.conf import settings
 from task_manager.statuses.models import TaskStatus
 from django.utils.translation import gettext as _

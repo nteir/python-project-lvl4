@@ -9,6 +9,7 @@ DELETE_TITLE = _('Delete user')
 DELETE_BTN = _('Yes, delete')
 
 # Messages
+USER_IN_USE = _('Can\'t delete the user because it\'s in use')
 LOGIN_SUCSESS = _("You are logged in.")
 LOGOUT_SUCSESS = _("You are logged out.")
 SIGNUP_SUCSESS = _("The user is created.")

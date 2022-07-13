@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<main role="main" class="container wrapper flex-grow-1">
+    {% include 'messages.html' %}
+    <h1 class="my-4">{% translate 'Task View' %}</h1>
+
+    <div class="card">
+        <h5 class="card-header">{{task.name}}</h5>
+        <div class="card-body">
+          <p class="card-text">{{task.description}}</p>
+          <table class="table table-sm table-borderless">
+            <tr>
+                <td>{% translate 'Author' %}</td>
+                <td>{{task.author}}</td>
+            </tr>
+            <tr>
+                <td>{% translate 'Executor' %}</td>
+                <td>{{task.executor}}</td>
+            </tr>
+            <tr>
+                <td>{% translate 'Status' %}</td>
+                <td>{{task.status}}</td>
+            </tr>
+            <tr>
+                <td>{% translate 'Date Created' %}</td>
+                <td>{{task.date_created}}</td>
+            </tr>
+          </table>
+          <a href="{% url 'task_update' task.id %}" class="btn btn-primary">{% translate 'Update' %}</a>
+          <a href="{% url 'task_delete' task.id %}" class="btn btn-primary">{% translate 'Delete' %}</a>
+        </div>
+      </div>
+
+</main>
+{% endblock content %}

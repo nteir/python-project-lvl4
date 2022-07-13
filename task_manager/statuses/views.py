@@ -8,6 +8,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from .forms import StatusCreateForm
 import task_manager.statuses.text_constants as txt
 from task_manager.views import get_form_context
+from django.db import models
 
 # Common attributes for Create and Update Views
 common_attr = {
@@ -77,6 +78,17 @@ class StatusDeleteView(
     redirect_url = reverse_lazy('login')
     success_message = txt.DELETE_STATUS_SUCSESS
     error_message = txt.NOT_LOGGED_IN
+
+    def form_valid(self, form):
+        try:
+            return super().form_valid(form)
+        except models.ProtectedError:
+            from django.shortcuts import HttpResponseRedirect
+            from django.contrib import messages
+            self.error_message = txt.STATUS_IN_USE
+            self.redirect_url = reverse_lazy('status_list')
+            messages.error(self.request, self.error_message)
+            return HttpResponseRedirect(self.redirect_url)
 
     def get_context_data(self, **kwargs):
         return get_form_context(

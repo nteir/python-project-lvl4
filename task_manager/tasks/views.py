@@ -1,6 +1,7 @@
 from .models import Task
+from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from task_manager.custom_objects import FailedAccessMixin
 from django.urls import reverse_lazy
@@ -17,6 +18,15 @@ class TaskListView(FailedAccessMixin, LoginRequiredMixin, ListView):
     template_name = "tasks/tasks.html"
     context_object_name = 'tasks'
     ordering = ['id']
+    redirect_url = reverse_lazy('login')
+    error_message = txt.NOT_LOGGED_IN
+
+
+class TaskDetailView(LoginRequiredMixin, DetailView):
+
+    model = Task
+    template_name = "tasks/task_card.html"
+    context_object_name = 'task'
     redirect_url = reverse_lazy('login')
     error_message = txt.NOT_LOGGED_IN
 
@@ -46,3 +56,21 @@ class TaskCreateView(
             txt.CREATE_BTN, self,
             **kwargs
         )
+
+
+class TaskUpdateView(
+    SuccessMessageMixin,
+    LoginRequiredMixin,
+    FailedAccessMixin,
+    UpdateView
+):
+    pass
+
+
+class TaskDeleteView(
+    SuccessMessageMixin,
+    LoginRequiredMixin,
+    FailedAccessMixin,
+    DeleteView
+):
+    pass
