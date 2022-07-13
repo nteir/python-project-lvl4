@@ -3,14 +3,14 @@ from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .custom_objects import FailedAccessMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import SignUpForm, LoginForm
 import task_manager.text_constants as txt
 from django.db import models
+import task_manager.custom_objects as CO
 
 User = get_user_model()
 
@@ -36,22 +36,17 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     template_name = "form.html"
     success_url = reverse_lazy('login')
     success_message = txt.SIGNUP_SUCSESS
+    title_text = txt.SIGNUP_TITLE
+    btn_text = txt.SIGNUP_BTN
 
     def get_context_data(self, **kwargs):
-        return get_form_context(
-            txt.SIGNUP_TITLE,
-            txt.SIGNUP_BTN, self,
-            **kwargs
-        )
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.title_text
+        context['button_text'] = self.btn_text
+        return context
 
 
-class UserUpdateView(
-    SuccessMessageMixin,
-    LoginRequiredMixin,
-    UserPassesTestMixin,
-    FailedAccessMixin,
-    UpdateView
-):
+class UserUpdateView(CO.CustomEditView, UserPassesTestMixin, UpdateView):
 
     model = User
     template_name = "form.html"
@@ -60,25 +55,14 @@ class UserUpdateView(
     redirect_url = reverse_lazy('users')
     success_message = txt.UPDATE_USER_SUCSESS
     error_message = txt.UPDATE_USER_FAIL
+    title_text = txt.UPDATE_TITLE
+    btn_text = txt.UPDATE_BTN
 
     def test_func(self):
         return self.request.user == self.get_object()
 
-    def get_context_data(self, **kwargs):
-        return get_form_context(
-            txt.UPDATE_TITLE,
-            txt.UPDATE_BTN, self,
-            **kwargs
-        )
 
-
-class UserDeleteView(
-    SuccessMessageMixin,
-    LoginRequiredMixin,
-    UserPassesTestMixin,
-    FailedAccessMixin,
-    DeleteView
-):
+class UserDeleteView(CO.CustomEditView, UserPassesTestMixin, DeleteView):
 
     model = User
     template_name = "delete.html"
@@ -86,6 +70,8 @@ class UserDeleteView(
     redirect_url = reverse_lazy('users')
     success_message = txt.DELETE_USER_SUCSESS
     error_message = txt.DELETE_USER_FAIL
+    title_text = txt.DELETE_TITLE
+    btn_text = txt.DELETE_BTN
 
     def test_func(self):
         return self.request.user == self.get_object()
@@ -99,13 +85,6 @@ class UserDeleteView(
             self.redirect_url = reverse_lazy('users')
             messages.error(self.request, self.error_message)
             return HttpResponseRedirect(self.redirect_url)
-
-    def get_context_data(self, **kwargs):
-        return get_form_context(
-            txt.DELETE_TITLE,
-            txt.DELETE_BTN, self,
-            **kwargs
-        )
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
@@ -125,10 +104,3 @@ class UserLogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
         messages.info(self.request, txt.LOGOUT_SUCSESS)
         return super().dispatch(request, *args, **kwargs)
-
-
-def get_form_context(title, btn, obj, **kwargs):
-    context = super(obj.__class__, obj).get_context_data(**kwargs)
-    context['title'] = title
-    context['button_text'] = btn
-    return context
