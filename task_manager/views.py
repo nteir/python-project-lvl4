@@ -99,7 +99,7 @@ class UserDeleteView(
             self.redirect_url = reverse_lazy('users')
             messages.error(self.request, self.error_message)
             return HttpResponseRedirect(self.redirect_url)
-    
+
     def get_context_data(self, **kwargs):
         return get_form_context(
             txt.DELETE_TITLE,
