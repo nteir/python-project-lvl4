@@ -1,8 +1,6 @@
-from django.test import TestCase
 from django.contrib.auth import get_user_model
 from .models import Task
 from django.urls import reverse
-
 import task_manager.custom_test_objects as CO
 
 User = get_user_model()
