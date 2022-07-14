@@ -12,7 +12,8 @@ class UsersTestCase(TestCase):
     def setUp(self):
         self.user1 = User.objects.get(pk=1)
         self.user2 = User.objects.get(pk=2)
-        self.user_list = [self.user1, self.user2]
+        self.user3 = User.objects.get(pk=3)
+        self.user_list = [self.user1, self.user2, self.user3]
 
     def test_users_view(self):
         response = self.client.get(reverse('users'))

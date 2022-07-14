@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from .models import Task
+# from task_manager.labels.models import Label
 from django.urls import reverse
 import task_manager.custom_test_objects as CO
 
@@ -15,6 +16,7 @@ class TasksTestCase(CO.CustomTestCase):
     fixtures = [
         'tasks/tasks.json',
         'statuses/statuses.json',
+        'labels/labels.json',
         'users.json',
     ]
 
@@ -34,6 +36,7 @@ class TasksTestCase(CO.CustomTestCase):
             'status': 1,
             'author': self.user.id,
             'executor': 2,
+            'labels': 1,
         }
         self.update_url = reverse('task_update', kwargs={'pk': self.object2.id})
         self.data_update = {
@@ -41,6 +44,7 @@ class TasksTestCase(CO.CustomTestCase):
             'description': 'text',
             'status': 1,
             'executor': 2,
+            'labels': 2,
         }
 
     def test_task_detail_view(self):

@@ -34,5 +34,23 @@
         "groups": [],
         "user_permissions": []
     }
+},
+{
+    "model": "task_manager.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$320000$VRSJ1N5Y8TDBjNGIaVnpUf$lVrPG7+IDANlmE1VKfIIrWo9ocuiyG+8lu6JgnRLSdA=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "aivanov",
+        "first_name": "Andrey",
+        "last_name": "Ivanov",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-07-13T13:05:50.837Z",
+        "groups": [],
+        "user_permissions": []
+    }
 }
 ]
