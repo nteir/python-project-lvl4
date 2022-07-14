@@ -36,13 +36,11 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     template_name = "form.html"
     success_url = reverse_lazy('login')
     success_message = txt.SIGNUP_SUCSESS
-    title_text = txt.SIGNUP_TITLE
-    btn_text = txt.SIGNUP_BTN
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = self.title_text
-        context['button_text'] = self.btn_text
+        context['title'] = txt.SIGNUP_TITLE
+        context['button_text'] = txt.SIGNUP_BTN
         return context
 
 

@@ -3,51 +3,40 @@ from django.contrib.auth import get_user_model
 from .models import TaskStatus
 from django.urls import reverse
 
+import task_manager.custom_test_objects as CO
+
 User = get_user_model()
 
 
 # Create your tests here.
-class StatusesTestCase(TestCase):
-
+class StatusesTestCase(CO.CustomTestCase):
+    """
+    List, Create and Update tests are
+    inherited from CO.CustomTestCase
+    """
     fixtures = ['statuses/statuses.json', 'users.json']
 
     def setUp(self):
         self.user = User.objects.get(pk=1)
-        self.status1 = TaskStatus.objects.get(pk=1)
-        self.status2 = TaskStatus.objects.get(pk=2)
-        self.status_list = [self.status1, self.status2]
-
-    def test_status_list_view(self):
-        response = self.client.get(reverse('status_list'))
-        self.assertEqual(response.status_code, 302)
-        self.client.force_login(self.user)
-        response = self.client.get(reverse('status_list'))
-        self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(response.context['statuses'], self.status_list)
-
-    def test_status_create(self):
-        self.client.force_login(self.user)
-        new_data = {
+        self.model = TaskStatus
+        self.object1 = self.model.objects.get(pk=1)
+        self.object2 = self.model.objects.get(pk=2)
+        self.object3 = self.model.objects.get(pk=3)
+        self.object_list = [self.object1, self.object2, self.object3]
+        self.context_name = 'statuses'
+        self.redirect_url = reverse('status_list')
+        self.create_url = reverse('status_create')
+        self.data_create = {
             'name': 'tstatus',
         }
-        url = reverse('status_create')
-        response = self.client.post(url, new_data, follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(TaskStatus.objects.filter(name='tstatus').count(), 1)
-
-    def test_status_update(self):
-        self.client.force_login(self.user)
-        url = reverse('status_update', kwargs={'pk': self.status2.id})
-        new_data = {
+        self.update_url = reverse('status_update', kwargs={'pk': self.object2.id})
+        self.data_update = {
             'name': 'tname',
         }
-        response = self.client.post(url, new_data, follow=True)
-        self.assertRedirects(response, reverse('status_list'))
-        self.assertEqual(TaskStatus.objects.filter(name='tname').count(), 1)
 
     def test_status_delete(self):
         self.client.force_login(self.user)
-        url = reverse('status_delete', kwargs={'pk': self.status2.id})
+        url = reverse('status_delete', kwargs={'pk': self.object2.id})
         response = self.client.post(url, follow=True)
-        self.assertEqual(TaskStatus.objects.filter(id=self.status2.id).count(), 0)
-        self.assertRedirects(response, reverse('status_list'))
+        self.assertEqual(self.model.objects.filter(id=self.object2.id).count(), 0)
+        self.assertRedirects(response, self.redirect_url)

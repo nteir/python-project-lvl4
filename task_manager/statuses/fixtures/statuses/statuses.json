@@ -14,5 +14,13 @@
         "name": "postpone",
         "date_created": "2022-07-11T12:25:03.986Z"
     }
+},
+{
+    "model": "statuses.taskstatus",
+    "pk": 3,
+    "fields": {
+        "name": "status",
+        "date_created": "2022-07-11T12:26:03.986Z"
+    }
 }
 ]

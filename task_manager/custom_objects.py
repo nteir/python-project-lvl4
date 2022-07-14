@@ -19,12 +19,12 @@ class FailedAccessMixin(AccessMixin):
         return redirect(self.redirect_url)
 
 
-class CustomEditView(
-    SuccessMessageMixin,
-    LoginRequiredMixin,
-    FailedAccessMixin,
-):
-
+class CustomEditView(SuccessMessageMixin, LoginRequiredMixin, FailedAccessMixin):
+    """
+    Overrides get_context_data adding
+    title and button text attributes to use
+    in reusable form pages.
+    """
     title_text = ""
     btn_text = ""
 
