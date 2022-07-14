@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-11 17:22+0300\n"
+"POT-Creation-Date: 2022-07-14 08:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,21 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
+#: task_manager/statuses/models.py:7
+#: task_manager/statuses/templates/statuses/statuses.html:13
+#: task_manager/tasks/models.py:9
+#: task_manager/tasks/templates/tasks/tasks.html:13
+msgid "Name"
+msgstr "Имя"
+
+#: task_manager/statuses/models.py:8
+#: task_manager/statuses/templates/statuses/statuses.html:14
+#: task_manager/tasks/models.py:14
+#: task_manager/tasks/templates/tasks/task_card.html:27
+#: task_manager/tasks/templates/tasks/tasks.html:17
+msgid "Date Created"
+msgstr "Дата создания"
+
 #: task_manager/statuses/templates/statuses/statuses.html:7
 #: task_manager/templates/navbar.html:16
 msgid "Statuses"
@@ -29,60 +44,55 @@ msgstr "Статусы"
 msgid "New status"
 msgstr "Создать статус"
 
-#: task_manager/statuses/templates/statuses/statuses.html:13
-msgid "Name"
-msgstr "Имя"
-
-#: task_manager/statuses/templates/statuses/statuses.html:14
-msgid "Date Created"
-msgstr "Дата создания"
-
 #: task_manager/statuses/templates/statuses/statuses.html:25
-#: task_manager/statuses/text_constants.py:7
-#: task_manager/templates/users.html:26 task_manager/text_constants.py:7
+#: task_manager/tasks/templates/tasks/task_card.html:31
+#: task_manager/tasks/templates/tasks/tasks.html:31
+#: task_manager/templates/users.html:26 task_manager/text_constants.py:17
 msgid "Update"
 msgstr "Изменить"
 
 #: task_manager/statuses/templates/statuses/statuses.html:26
+#: task_manager/tasks/templates/tasks/task_card.html:32
+#: task_manager/tasks/templates/tasks/tasks.html:32
 #: task_manager/templates/users.html:27
 msgid "Delete"
 msgstr "Удалить"
 
-#: task_manager/statuses/text_constants.py:4
-msgid "Create status"
-msgstr "Создать статус"
+#: task_manager/tasks/models.py:10
+msgid "Description"
+msgstr "Описание"
 
-#: task_manager/statuses/text_constants.py:5
-msgid "Create"
-msgstr "Создать"
+#: task_manager/tasks/models.py:15
+msgid "Date Modified"
+msgstr "Дата изменения"
 
-#: task_manager/statuses/text_constants.py:6
-msgid "Update status"
-msgstr "Изменение статуса"
+#: task_manager/tasks/templates/tasks/task_card.html:7
+msgid "Task View"
+msgstr "Просмотр задачи"
 
-#: task_manager/statuses/text_constants.py:8
-msgid "Delete status"
-msgstr "Удаление статуса"
+#: task_manager/tasks/templates/tasks/task_card.html:15
+#: task_manager/tasks/templates/tasks/tasks.html:15
+msgid "Author"
+msgstr "Автор"
 
-#: task_manager/statuses/text_constants.py:9 task_manager/text_constants.py:9
-msgid "Yes, delete"
-msgstr "Да, удалить"
+#: task_manager/tasks/templates/tasks/task_card.html:19
+#: task_manager/tasks/templates/tasks/tasks.html:16
+msgid "Executor"
+msgstr "Исполнитель"
 
-#: task_manager/statuses/text_constants.py:12
-msgid "You are not authorized! Please log in."
-msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+#: task_manager/tasks/templates/tasks/task_card.html:23
+#: task_manager/tasks/templates/tasks/tasks.html:14
+msgid "Status"
+msgstr "Статус"
 
-#: task_manager/statuses/text_constants.py:13
-msgid "The status is created."
-msgstr "Статус успешно создан"
+#: task_manager/tasks/templates/tasks/tasks.html:7
+#: task_manager/templates/navbar.html:19
+msgid "Tasks"
+msgstr "Задачи"
 
-#: task_manager/statuses/text_constants.py:14
-msgid "The status is updated."
-msgstr "Статус успешно изменён"
-
-#: task_manager/statuses/text_constants.py:15
-msgid "The status is deleted."
-msgstr "Статус успешно удалён"
+#: task_manager/tasks/templates/tasks/tasks.html:8
+msgid "New task"
+msgstr "Создать задачу"
 
 #: task_manager/templates/base.html:12
 msgid "Hexlet Task Manager"
@@ -105,7 +115,7 @@ msgid "Learn more"
 msgstr "Узнать больше"
 
 #: task_manager/templates/login.html:7 task_manager/templates/login.html:12
-#: task_manager/templates/navbar.html:34
+#: task_manager/templates/navbar.html:37
 msgid "Sign in"
 msgstr "Вход"
 
@@ -117,11 +127,11 @@ msgstr "Менеджер задач"
 msgid "Users"
 msgstr "Пользователи"
 
-#: task_manager/templates/navbar.html:30
+#: task_manager/templates/navbar.html:33
 msgid "Log out"
 msgstr "Выход"
 
-#: task_manager/templates/navbar.html:37 task_manager/text_constants.py:5
+#: task_manager/templates/navbar.html:40 task_manager/text_constants.py:16
 msgid "Sign up"
 msgstr "Регистрация"
 
@@ -149,34 +159,106 @@ msgstr "Вперёд"
 msgid "New user sign up"
 msgstr "Регистрация"
 
-#: task_manager/text_constants.py:6
+#: task_manager/text_constants.py:5
 msgid "Update user"
 msgstr "Изменение пользователя"
 
-#: task_manager/text_constants.py:8
+#: task_manager/text_constants.py:6
 msgid "Delete user"
 msgstr "Удаление пользователя"
 
+#: task_manager/text_constants.py:8
+msgid "Create status"
+msgstr "Создать статус"
+
+#: task_manager/text_constants.py:9
+msgid "Update status"
+msgstr "Изменение статуса"
+
+#: task_manager/text_constants.py:10
+msgid "Delete status"
+msgstr "Удаление статуса"
+
 #: task_manager/text_constants.py:12
+msgid "Create task"
+msgstr "Создать задачу"
+
+#: task_manager/text_constants.py:13
+msgid "Update task"
+msgstr "Изменение задачи"
+
+#: task_manager/text_constants.py:14
+msgid "Delete task"
+msgstr "Удаление задачи"
+
+#: task_manager/text_constants.py:18
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: task_manager/text_constants.py:19
+msgid "Create"
+msgstr "Создать"
+
+#: task_manager/text_constants.py:22
 msgid "You are logged in."
 msgstr "Вы залогинены"
 
-#: task_manager/text_constants.py:13
+#: task_manager/text_constants.py:23
 msgid "You are logged out."
 msgstr "Вы разлогинены"
 
-#: task_manager/text_constants.py:14
+#: task_manager/text_constants.py:24
 msgid "The user is created."
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/text_constants.py:15
+#: task_manager/text_constants.py:25
 msgid "The user is updated."
 msgstr "Пользователь успешно изменён"
 
-#: task_manager/text_constants.py:16 task_manager/text_constants.py:18
+#: task_manager/text_constants.py:26 task_manager/text_constants.py:28
 msgid "You don't have permissions to edit other users."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/text_constants.py:17
+#: task_manager/text_constants.py:27
 msgid "The user is deleted."
 msgstr "Пользователь успешно удалён"
+
+#: task_manager/text_constants.py:29
+msgid "Can't delete the user because it's in use"
+msgstr "Невозможно удалить пользователя, потому что он используется"
+
+#: task_manager/text_constants.py:31
+msgid "You are not authorized! Please log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: task_manager/text_constants.py:33
+msgid "The status is created."
+msgstr "Статус успешно создан"
+
+#: task_manager/text_constants.py:34
+msgid "The status is updated."
+msgstr "Статус успешно изменён"
+
+#: task_manager/text_constants.py:35
+msgid "The status is deleted."
+msgstr "Статус успешно удалён"
+
+#: task_manager/text_constants.py:36
+msgid "Can't delete the status because it's in use"
+msgstr "Невозможно удалить статус, потому что он используется"
+
+#: task_manager/text_constants.py:38
+msgid "The task is created."
+msgstr "Задача успешно создана"
+
+#: task_manager/text_constants.py:39
+msgid "The task is updated."
+msgstr "Задача успешно изменена"
+
+#: task_manager/text_constants.py:40
+msgid "The task is deleted."
+msgstr "Задача успешно удалена"
+
+#: task_manager/text_constants.py:41
+msgid "The task can only be deleted by it's author."
+msgstr "Задачу может удалить только её автор"
