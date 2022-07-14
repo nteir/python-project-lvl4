@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from task_manager.statuses.models import TaskStatus
+from task_manager.labels.models import Label
 from django.utils.translation import gettext as _
 
 
@@ -23,3 +24,9 @@ class Task(models.Model):
     )
     date_created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date Created'))
     date_modified = models.DateTimeField(auto_now=True, verbose_name=_('Date Modified'))
+    labels = models.ManyToManyField(Label, through='TaskLabelRelation', verbose_name=_('Labels'))
+
+
+class TaskLabelRelation(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    label = models.ForeignKey(Label, on_delete=models.PROTECT)

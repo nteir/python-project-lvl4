@@ -27,6 +27,16 @@
                 <td>{% translate 'Date Created' %}</td>
                 <td>{{task.date_created}}</td>
             </tr>
+            <tr>
+              <td>{% translate 'Labels' %}:</td>
+              <td>
+                <ul>
+                {% for label in task.labels.all %}
+                  <li>{{ label.name }}</li>
+                {% endfor %}
+                </ul>
+              </td>
+          </tr>
           </table>
           <a href="{% url 'task_update' task.id %}" class="btn btn-primary">{% translate 'Update' %}</a>
           <a href="{% url 'task_delete' task.id %}" class="btn btn-primary">{% translate 'Delete' %}</a>

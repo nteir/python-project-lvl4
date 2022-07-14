@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<main role="main" class="container wrapper flex-grow-1">
+    {% include 'messages.html' %}
+    <h1 class="my-4">{% translate 'Labels' %}</h1>
+    <a class="nav-link" href="{% url 'label_create' %}">{% translate 'New label' %}</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">{% translate 'Name' %}</th>
+                <th scope="col">{% translate 'Date Created' %}</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for label in labels %}
+            <tr>
+                <th scope="row">{{label.id}}</th>
+                <td>{{label.name}}</td>
+                <td>{{label.date_created}}</td>
+                <td>
+                    <a href="{% url 'label_update' label.id %}">{% translate 'Update' %}</a>
+                    <br/><a href="{% url 'label_delete' label.id %}">{% translate 'Delete' %}</a>
+                </td>
+            </tr>              
+            {% endfor %}
+        </tbody>            
+    </table>        
+</main>
+{% endblock content %}
