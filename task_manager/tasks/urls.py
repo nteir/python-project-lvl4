@@ -1,26 +1,8 @@
 from django.urls import path
 from task_manager.tasks import views
+from task_manager.custom_objects import get_path_arguments
 
-urlpatterns = [
-    path('', views.TaskListView.as_view(), name='task_list'),
-    path(
-        '<int:pk>/',
-        views.TaskDetailView.as_view(),
-        name='task_card'
-    ),
-    path(
-        'create/',
-        views.TaskCreateView.as_view(**views.common_attr),
-        name='task_create'
-    ),
-    path(
-        '<int:pk>/update/',
-        views.TaskUpdateView.as_view(**views.common_attr),
-        name='task_update'
-    ),
-    path(
-        '<int:pk>/delete/',
-        views.TaskDeleteView.as_view(),
-        name='task_delete'
-    ),
-]
+arguments = get_path_arguments(views, 'task')
+urlpatterns = [path(*a, **k) for a, k in arguments]
+detail_path = path('<int:pk>/', views.ObjectDetailView.as_view(), name='task_card')
+urlpatterns.append(detail_path)

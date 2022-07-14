@@ -1,21 +1,6 @@
 from django.urls import path
 from task_manager.statuses import views
+from task_manager.custom_objects import get_path_arguments
 
-urlpatterns = [
-    path('', views.StatusListView.as_view(), name='status_list'),
-    path(
-        'create/',
-        views.StatusCreateView.as_view(**views.common_attr),
-        name='status_create'
-    ),
-    path(
-        '<int:pk>/update/',
-        views.StatusUpdateView.as_view(**views.common_attr),
-        name='status_update'
-    ),
-    path(
-        '<int:pk>/delete/',
-        views.StatusDeleteView.as_view(),
-        name='status_delete'
-    ),
-]
+arguments = get_path_arguments(views, 'status')
+urlpatterns = [path(*a, **k) for a, k in arguments]

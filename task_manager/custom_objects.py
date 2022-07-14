@@ -33,3 +33,36 @@ class CustomEditView(SuccessMessageMixin, LoginRequiredMixin, FailedAccessMixin)
         context['title'] = self.title_text
         context['button_text'] = self.btn_text
         return context
+
+
+def get_path_arguments(module, obj_name):
+    """
+    Arguments to generate urlpatterns for
+    List, Create, Update, Delete views,
+    common for statuses, labels and tasks.
+    """
+    args = [
+        [
+            '',
+            module.ObjectListView.as_view(),
+        ],
+        [
+            'create/',
+            module.ObjectCreateView.as_view(**module.common_attr),
+        ],
+        [
+            '<int:pk>/update/',
+            module.ObjectUpdateView.as_view(**module.common_attr),
+        ],
+        [
+            '<int:pk>/delete/',
+            module.ObjectDeleteView.as_view(),
+        ],
+    ]
+    kwargs = [
+        {'name': f'{obj_name}_list', },
+        {'name': f'{obj_name}_create', },
+        {'name': f'{obj_name}_update', },
+        {'name': f'{obj_name}_delete', },
+    ]
+    return list(zip(args, kwargs))

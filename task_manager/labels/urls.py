@@ -1,21 +1,6 @@
 from django.urls import path
 from task_manager.labels import views
+from task_manager.custom_objects import get_path_arguments
 
-urlpatterns = [
-    path('', views.LabelListView.as_view(), name='label_list'),
-    path(
-        'create/',
-        views.LabelCreateView.as_view(**views.common_attr),
-        name='label_create'
-    ),
-    path(
-        '<int:pk>/update/',
-        views.LabelUpdateView.as_view(**views.common_attr),
-        name='label_update'
-    ),
-    path(
-        '<int:pk>/delete/',
-        views.LabelDeleteView.as_view(),
-        name='label_delete'
-    ),
-]
+arguments = get_path_arguments(views, 'label')
+urlpatterns = [path(*a, **k) for a, k in arguments]

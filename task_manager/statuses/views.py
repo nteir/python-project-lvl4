@@ -21,7 +21,7 @@ common_attr = {
 
 
 # Create your views here.
-class StatusListView(CO.FailedAccessMixin, LoginRequiredMixin, ListView):
+class ObjectListView(CO.FailedAccessMixin, LoginRequiredMixin, ListView):
 
     model = TaskStatus
     template_name = "statuses/statuses.html"
@@ -31,21 +31,21 @@ class StatusListView(CO.FailedAccessMixin, LoginRequiredMixin, ListView):
     error_message = txt.NOT_LOGGED_IN
 
 
-class StatusCreateView(CO.CustomEditView, CreateView):
+class ObjectCreateView(CO.CustomEditView, CreateView):
 
     success_message = txt.CREATE_STATUS_SUCSESS
     title_text = txt.CREATE_STATUS_TITLE
     btn_text = txt.CREATE_BTN
 
 
-class StatusUpdateView(CO.CustomEditView, UpdateView):
+class ObjectUpdateView(CO.CustomEditView, UpdateView):
 
     success_message = txt.UPDATE_STATUS_SUCSESS
     title_text = txt.UPDATE_STATUS_TITLE
     btn_text = txt.UPDATE_BTN
 
 
-class StatusDeleteView(CO.CustomEditView, DeleteView):
+class ObjectDeleteView(CO.CustomEditView, DeleteView):
 
     model = TaskStatus
     template_name = "delete.html"

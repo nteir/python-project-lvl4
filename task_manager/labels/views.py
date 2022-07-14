@@ -21,7 +21,7 @@ common_attr = {
 
 
 # Create your views here.
-class LabelListView(CO.FailedAccessMixin, LoginRequiredMixin, ListView):
+class ObjectListView(CO.FailedAccessMixin, LoginRequiredMixin, ListView):
 
     model = Label
     template_name = "labels/labels.html"
@@ -31,21 +31,21 @@ class LabelListView(CO.FailedAccessMixin, LoginRequiredMixin, ListView):
     error_message = txt.NOT_LOGGED_IN
 
 
-class LabelCreateView(CO.CustomEditView, CreateView):
+class ObjectCreateView(CO.CustomEditView, CreateView):
 
     success_message = txt.CREATE_LABEL_SUCSESS
     title_text = txt.CREATE_LABEL_TITLE
     btn_text = txt.CREATE_BTN
 
 
-class LabelUpdateView(CO.CustomEditView, UpdateView):
+class ObjectUpdateView(CO.CustomEditView, UpdateView):
 
     success_message = txt.UPDATE_LABEL_SUCSESS
     title_text = txt.UPDATE_LABEL_TITLE
     btn_text = txt.UPDATE_BTN
 
 
-class LabelDeleteView(CO.CustomEditView, DeleteView):
+class ObjectDeleteView(CO.CustomEditView, DeleteView):
 
     model = Label
     template_name = "delete.html"

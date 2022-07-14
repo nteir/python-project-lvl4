@@ -20,7 +20,7 @@ common_attr = {
 
 
 # Create your views here.
-class TaskListView(CO.FailedAccessMixin, LoginRequiredMixin, ListView):
+class ObjectListView(CO.FailedAccessMixin, LoginRequiredMixin, ListView):
 
     model = Task
     template_name = "tasks/tasks.html"
@@ -30,7 +30,7 @@ class TaskListView(CO.FailedAccessMixin, LoginRequiredMixin, ListView):
     error_message = txt.NOT_LOGGED_IN
 
 
-class TaskDetailView(LoginRequiredMixin, DetailView):
+class ObjectDetailView(LoginRequiredMixin, DetailView):
 
     model = Task
     template_name = "tasks/task_card.html"
@@ -39,7 +39,7 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
     error_message = txt.NOT_LOGGED_IN
 
 
-class TaskCreateView(CO.CustomEditView, CreateView):
+class ObjectCreateView(CO.CustomEditView, CreateView):
 
     success_message = txt.CREATE_TASK_SUCSESS
     title_text = txt.CREATE_TASK_TITLE
@@ -50,14 +50,14 @@ class TaskCreateView(CO.CustomEditView, CreateView):
         return super().form_valid(form)
 
 
-class TaskUpdateView(CO.CustomEditView, UpdateView):
+class ObjectUpdateView(CO.CustomEditView, UpdateView):
 
     success_message = txt.UPDATE_TASK_SUCSESS
     title_text = txt.UPDATE_TASK_TITLE
     btn_text = txt.UPDATE_BTN
 
 
-class TaskDeleteView(CO.CustomEditView, UserPassesTestMixin, DeleteView):
+class ObjectDeleteView(CO.CustomEditView, UserPassesTestMixin, DeleteView):
 
     model = Task
     template_name = "delete.html"
