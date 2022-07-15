@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n bootstrap4 %}
 
 {% block content %}
 <main role="main" class="container wrapper flex-grow-1">
     {% include 'messages.html' %}
     <h1 class="my-4">{% translate 'Tasks' %}</h1>
     <a class="nav-link" href="{% url 'task_create' %}">{% translate 'New task' %}</a>
+    <div class="container">
+        <form method="get">
+            {{ filter.form }}
+            {% bootstrap_button 'button_text' button_type="submit"  button_class="btn-primary" %}
+        </form>
+    </div>
+    
     <table class="table table-striped">
         <thead>
             <tr>
@@ -19,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for task in tasks %}
+            {% for task in filter.qs %}
             <tr>
                 <th scope="row">{{task.id}}</th>
                 <td><a href="{% url 'task_card' task.id %}">{{task.name}}</a></td>
