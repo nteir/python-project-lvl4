@@ -7,7 +7,6 @@ from django.urls import reverse_lazy
 from .forms import TaskCreateForm
 import task_manager.text_constants as txt
 import task_manager.custom_objects as CO
-
 from .filter import TaskFilter
 
 # Common attributes for Create and Update Views
@@ -21,13 +20,14 @@ common_attr = {
 }
 
 
-class ObjectListView(CO.FailedAccessMixin, LoginRequiredMixin, FilterView):
+class ObjectListView(CO.CustomEditView, LoginRequiredMixin, FilterView):
 
     model = Task
     template_name = "tasks/tasks.html"
     filterset_class = TaskFilter
     context_object_name = 'tasks'
     ordering = ['id']
+    btn_text = txt.FILTER_BTN
     redirect_url = reverse_lazy('login')
     error_message = txt.NOT_LOGGED_IN
 

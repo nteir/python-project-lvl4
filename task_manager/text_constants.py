@@ -22,6 +22,9 @@ UPDATE_BTN = _('Update')
 DELETE_BTN = _('Yes, delete')
 CREATE_BTN = _('Create')
 
+FILTER_BTN = _('Show')
+FILTER_MY_TASKS = _('Only my tasks')
+
 # Messages
 LOGIN_SUCSESS = _("You are logged in.")
 LOGOUT_SUCSESS = _("You are logged out.")
