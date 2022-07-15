@@ -27,6 +27,7 @@ class ObjectListView(CO.FailedAccessMixin, LoginRequiredMixin, FilterView):
     template_name = "tasks/tasks.html"
     filterset_class = TaskFilter
     context_object_name = 'tasks'
+    ordering = ['id']
     redirect_url = reverse_lazy('login')
     error_message = txt.NOT_LOGGED_IN
 
