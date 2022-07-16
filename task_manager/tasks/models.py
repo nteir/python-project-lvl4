@@ -24,7 +24,13 @@ class Task(models.Model):
     )
     date_created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date Created'))
     date_modified = models.DateTimeField(auto_now=True, verbose_name=_('Date Modified'))
-    labels = models.ManyToManyField(Label, through='TaskLabelRelation', verbose_name=_('Labels'))
+    labels = models.ManyToManyField(
+        Label,
+        through='TaskLabelRelation',
+        null=True,
+        blank=True,
+        verbose_name=_('Labels')
+    )
 
 
 class TaskLabelRelation(models.Model):
