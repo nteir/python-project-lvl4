@@ -1,0 +1,10 @@
+[
+{
+    "model": "tasks.tasklabelrelation",
+    "pk": 1,
+    "fields": {
+        "task": 3,
+        "label": 2
+    }
+}
+]

@@ -10,13 +10,13 @@ class TaskFilter(django_filters.FilterSet):
     label_set = Label.objects.values_list('id', 'name').all()
     labels = django_filters.filters.ChoiceFilter(choices=label_set)
 
-    user_tasks = django_filters.filters.BooleanFilter(
+    self_tasks = django_filters.filters.BooleanFilter(
         label=txt.FILTER_MY_TASKS,
         widget=forms.CheckboxInput(),
-        method='get_uesr_tasks'
+        method='get_user_tasks'
     )
 
-    def get_uesr_tasks(self, queryset, name, value):
+    def get_user_tasks(self, queryset, name, value):
         if value:
             author = getattr(self.request, "user", None)
             queryset = queryset.filter(author=author)
