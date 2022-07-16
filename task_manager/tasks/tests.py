@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
-from .models import Task, TaskLabelRelation
-from task_manager.labels.models import Label
+from .models import Task
 from django.urls import reverse
 import task_manager.custom_test_objects as CO
 
@@ -89,7 +88,7 @@ class TasksTestCase(CO.CustomTestCase):
         # f = TaskFilter(data={'labels': 2}, queryset=qs)
         # result = f.qs
         # print(result)
-        
+
         self.client.force_login(self.user)
         url = f"{reverse('task_list')}?labels=2"
         response = self.client.get(url)
