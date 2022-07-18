@@ -5,7 +5,7 @@
 <main role="main" class="container wrapper flex-grow-1">
     {% include 'messages.html' %}
     <h1 class="my-4">{% translate 'Tasks' %}</h1>
-    <a class="nav-link" href="{% url 'task_create' %}">{% translate 'New task' %}</a>
+    <a class="nav-link" href="{% url 'tasks:obj_create' %}">{% translate 'New task' %}</a>
     <div class="container">
         <form method="get">
             {{ filter.form }}
@@ -29,14 +29,14 @@
             {% for task in filter.qs %}
             <tr>
                 <th scope="row">{{task.id}}</th>
-                <td><a href="{% url 'task_card' task.id %}">{{task.name}}</a></td>
+                <td><a href="{% url 'tasks:obj_card' task.id %}">{{task.name}}</a></td>
                 <td>{{task.status}}</td>
                 <td>{{task.author}}</td>
                 <td>{{task.executor}}</td>
                 <td>{{task.date_created}}</td>
                 <td>
-                    <a href="{% url 'task_update' task.id %}">{% translate 'Update' %}</a>
-                    <br/><a href="{% url 'task_delete' task.id %}">{% translate 'Delete' %}</a>
+                    <a href="{% url 'tasks:obj_update' task.id %}">{% translate 'Update' %}</a>
+                    <br/><a href="{% url 'tasks:obj_delete' task.id %}">{% translate 'Delete' %}</a>
                 </td>
             </tr>              
             {% endfor %}

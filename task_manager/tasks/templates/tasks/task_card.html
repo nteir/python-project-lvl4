@@ -38,8 +38,8 @@
               </td>
           </tr>
           </table>
-          <a href="{% url 'task_update' task.id %}" class="btn btn-primary">{% translate 'Update' %}</a>
-          <a href="{% url 'task_delete' task.id %}" class="btn btn-primary">{% translate 'Delete' %}</a>
+          <a href="{% url 'tasks:obj_update' task.id %}" class="btn btn-primary">{% translate 'Update' %}</a>
+          <a href="{% url 'tasks:obj_delete' task.id %}" class="btn btn-primary">{% translate 'Delete' %}</a>
         </div>
       </div>
 

@@ -4,8 +4,8 @@
 {% block content %}
 <main role="main" class="container wrapper flex-grow-1">
     {% include 'messages.html' %}
-    <h1 class="my-4">{% translate 'Labels' %}</h1>
-    <a class="nav-link" href="{% url 'label_create' %}">{% translate 'New label' %}</a>
+    <h1 class="my-4">{{ title }}</h1>
+    <a class="nav-link" href="{% url app_name|add:':obj_create' %}">{{ new_obj_text }}</a>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -16,14 +16,14 @@
             </tr>
         </thead>
         <tbody>
-            {% for label in labels %}
+            {% for item in objects %}
             <tr>
-                <th scope="row">{{label.id}}</th>
-                <td>{{label.name}}</td>
-                <td>{{label.date_created}}</td>
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.name}}</td>
+                <td>{{item.date_created}}</td>
                 <td>
-                    <a href="{% url 'label_update' label.id %}">{% translate 'Update' %}</a>
-                    <br/><a href="{% url 'label_delete' label.id %}">{% translate 'Delete' %}</a>
+                    <a href="{% url app_name|add:':obj_update' item.id %}">{% translate 'Update' %}</a>
+                    <br/><a href="{% url app_name|add:':obj_delete' item.id %}">{% translate 'Delete' %}</a>
                 </td>
             </tr>              
             {% endfor %}

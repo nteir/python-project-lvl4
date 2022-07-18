@@ -1,8 +1,11 @@
 from django.contrib.auth.mixins import AccessMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.list import ListView
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
+import task_manager.text_constants as txt
 
 
 class FailedAccessMixin(AccessMixin):
@@ -25,8 +28,8 @@ class CustomEditView(SuccessMessageMixin, LoginRequiredMixin, FailedAccessMixin)
     title and button text attributes to use
     in reusable form pages.
     """
-    title_text = ""
-    btn_text = ""
+    title_text = ''
+    btn_text = ''
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -35,7 +38,29 @@ class CustomEditView(SuccessMessageMixin, LoginRequiredMixin, FailedAccessMixin)
         return context
 
 
-def get_path_arguments(module, obj_name):
+class CustomListView(FailedAccessMixin, LoginRequiredMixin, ListView):
+    """
+    Common properties for statuses and labels
+    list views.
+    """
+    ordering = ['id']
+    redirect_url = reverse_lazy('login')
+    error_message = txt.NOT_LOGGED_IN
+    template_name = 'list.html'
+    context_object_name = 'objects'
+    app_name = ''
+    title = ''
+    new_obj_text = ''
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['app_name'] = self.app_name
+        context['title'] = self.title
+        context['new_obj_text'] = self.new_obj_text
+        return context
+
+
+def get_path_arguments(module):
     """
     Arguments to generate urlpatterns for
     List, Create, Update, Delete views,
@@ -60,9 +85,9 @@ def get_path_arguments(module, obj_name):
         ],
     ]
     kwargs = [
-        {'name': f'{obj_name}_list', },
-        {'name': f'{obj_name}_create', },
-        {'name': f'{obj_name}_update', },
-        {'name': f'{obj_name}_delete', },
+        {'name': 'obj_list', },
+        {'name': 'obj_create', },
+        {'name': 'obj_update', },
+        {'name': 'obj_delete', },
     ]
     return list(zip(args, kwargs))

@@ -21,20 +21,20 @@ class StatusesTestCase(CO.CustomTestCase):
         self.object2 = self.model.objects.get(pk=2)
         self.object3 = self.model.objects.get(pk=3)
         self.object_list = [self.object1, self.object2, self.object3]
-        self.context_name = 'statuses'
-        self.redirect_url = reverse('status_list')
-        self.create_url = reverse('status_create')
+        self.context_name = 'objects'
+        self.redirect_url = reverse('statuses:obj_list')
+        self.create_url = reverse('statuses:obj_create')
         self.data_create = {
             'name': 'tstatus',
         }
-        self.update_url = reverse('status_update', kwargs={'pk': self.object2.id})
+        self.update_url = reverse('statuses:obj_update', kwargs={'pk': self.object2.id})
         self.data_update = {
             'name': 'tname',
         }
 
     def test_status_delete(self):
         self.client.force_login(self.user)
-        url = reverse('status_delete', kwargs={'pk': self.object2.id})
+        url = reverse('statuses:obj_delete', kwargs={'pk': self.object2.id})
         response = self.client.post(url, follow=True)
         self.assertEqual(self.model.objects.filter(id=self.object2.id).count(), 0)
         self.assertRedirects(response, self.redirect_url)

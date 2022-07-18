@@ -14,7 +14,7 @@ common_attr = {
     'model': Task,
     'form_class': TaskCreateForm,
     'template_name': "form.html",
-    'success_url': reverse_lazy('task_list'),
+    'success_url': reverse_lazy('tasks:obj_list'),
     'redirect_url': reverse_lazy('login'),
     'error_message': txt.NOT_LOGGED_IN,
 }
@@ -63,8 +63,8 @@ class ObjectDeleteView(CO.CustomEditView, UserPassesTestMixin, DeleteView):
 
     model = Task
     template_name = "delete.html"
-    success_url = reverse_lazy('task_list')
-    redirect_url = reverse_lazy('task_list')
+    success_url = reverse_lazy('tasks:obj_list')
+    redirect_url = reverse_lazy('tasks:obj_list')
     success_message = txt.DELETE_TASK_SUCSESS
     error_message = txt.DELETE_TASK_FAIL
     title_text = txt.DELETE_TASK_TITLE

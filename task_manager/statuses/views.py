@@ -1,7 +1,5 @@
 from .models import TaskStatus
-from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .forms import StatusCreateForm
 import task_manager.text_constants as txt
@@ -14,21 +12,19 @@ common_attr = {
     'model': TaskStatus,
     'form_class': StatusCreateForm,
     'template_name': "form.html",
-    'success_url': reverse_lazy('status_list'),
+    'success_url': reverse_lazy('statuses:obj_list'),
     'redirect_url': reverse_lazy('login'),
     'error_message': txt.NOT_LOGGED_IN,
 }
 
 
 # Create your views here.
-class ObjectListView(CO.FailedAccessMixin, LoginRequiredMixin, ListView):
+class ObjectListView(CO.CustomListView):
 
     model = TaskStatus
-    template_name = "statuses/statuses.html"
-    context_object_name = 'statuses'
-    ordering = ['id']
-    redirect_url = reverse_lazy('login')
-    error_message = txt.NOT_LOGGED_IN
+    app_name = 'statuses'
+    title = txt.STATUS_LIST_TITLE
+    new_obj_text = txt.STATUS_LIST_NEW
 
 
 class ObjectCreateView(CO.CustomEditView, CreateView):
@@ -49,7 +45,7 @@ class ObjectDeleteView(CO.CustomEditView, DeleteView):
 
     model = TaskStatus
     template_name = "delete.html"
-    success_url = reverse_lazy('status_list')
+    success_url = reverse_lazy('statuses:obj_list')
     redirect_url = reverse_lazy('login')
     success_message = txt.DELETE_STATUS_SUCSESS
     error_message = txt.NOT_LOGGED_IN
@@ -63,6 +59,6 @@ class ObjectDeleteView(CO.CustomEditView, DeleteView):
             from django.shortcuts import HttpResponseRedirect
             from django.contrib import messages
             self.error_message = txt.STATUS_IN_USE
-            self.redirect_url = reverse_lazy('status_list')
+            self.redirect_url = reverse_lazy('statuses:obj_list')
             messages.error(self.request, self.error_message)
             return HttpResponseRedirect(self.redirect_url)

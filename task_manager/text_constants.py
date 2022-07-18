@@ -25,6 +25,12 @@ CREATE_BTN = _('Create')
 FILTER_BTN = _('Show')
 FILTER_MY_TASKS = _('Only my tasks')
 
+STATUS_LIST_TITLE = _('Statuses')
+STATUS_LIST_NEW = _('New status')
+
+LABEL_LIST_TITLE = _('Labels')
+LABEL_LIST_NEW = _('New label')
+
 # Messages
 LOGIN_SUCSESS = _("You are logged in.")
 LOGOUT_SUCSESS = _("You are logged out.")
