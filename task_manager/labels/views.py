@@ -1,12 +1,10 @@
 from .models import Label
-from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 from .forms import LabelCreateForm
 import task_manager.text_constants as txt
-from django.db import models
-import task_manager.custom_objects as CO
 
-
+# Re-using the List, Create, Update and Delete
+# views from statuses, passing new attributes in as_view()
 # Common attributes for Create and Update Views
 common_attr = {
     'model': Label,
@@ -38,29 +36,13 @@ update_view_attr = {
 }
 update_view_attr.update(common_attr)
 
+delete_view_attr = {
+    'model': Label,
+    'success_url': reverse_lazy('labels:obj_list'),
+    'success_message': txt.DELETE_LABEL_SUCSESS,
+    'title_text': txt.DELETE_LABEL_TITLE,
+    'in_use_text': txt.LABEL_IN_USE,
+}
+
 
 # Create your views here.
-# Re-using the List, Create and Update views from statuses
-
-
-class ObjectDeleteView(CO.CustomEditView, DeleteView):
-
-    model = Label
-    template_name = "delete.html"
-    success_url = reverse_lazy('labels:obj_list')
-    redirect_url = reverse_lazy('login')
-    success_message = txt.DELETE_LABEL_SUCSESS
-    error_message = txt.NOT_LOGGED_IN
-    title_text = txt.DELETE_LABEL_TITLE
-    btn_text = txt.DELETE_BTN
-
-    def form_valid(self, form):
-        try:
-            return super().form_valid(form)
-        except models.ProtectedError:
-            from django.shortcuts import HttpResponseRedirect
-            from django.contrib import messages
-            self.error_message = txt.LABEL_IN_USE
-            self.redirect_url = reverse_lazy('labels:obj_list')
-            messages.error(self.request, self.error_message)
-            return HttpResponseRedirect(self.redirect_url)

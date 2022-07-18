@@ -2,7 +2,9 @@ from django.contrib.auth.mixins import AccessMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
+from django.views.generic.edit import DeleteView
 from django.contrib import messages
+from django.db import models
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 import task_manager.text_constants as txt
@@ -58,6 +60,26 @@ class CustomListView(FailedAccessMixin, LoginRequiredMixin, ListView):
         context['title'] = self.title
         context['new_obj_text'] = self.new_obj_text
         return context
+
+
+class CustomDeleteView(CustomEditView, DeleteView):
+
+    template_name = "delete.html"
+    redirect_url = reverse_lazy('login')
+    error_message = txt.NOT_LOGGED_IN
+    btn_text = txt.DELETE_BTN
+    in_use_text = ''
+
+    def form_valid(self, form):
+        try:
+            return super().form_valid(form)
+        except models.ProtectedError:
+            from django.shortcuts import HttpResponseRedirect
+            from django.contrib import messages
+            self.error_message = self.in_use_text
+            self.redirect_url = self.success_url
+            messages.error(self.request, self.error_message)
+            return HttpResponseRedirect(self.redirect_url)
 
 
 def get_path_arguments(module):

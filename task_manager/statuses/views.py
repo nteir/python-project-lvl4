@@ -1,9 +1,8 @@
 from .models import TaskStatus
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 from .forms import StatusCreateForm
 import task_manager.text_constants as txt
-from django.db import models
 import task_manager.custom_objects as CO
 
 
@@ -41,24 +40,10 @@ class ObjectUpdateView(CO.CustomEditView, UpdateView):
     btn_text = txt.UPDATE_BTN
 
 
-class ObjectDeleteView(CO.CustomEditView, DeleteView):
+class ObjectDeleteView(CO.CustomDeleteView):
 
     model = TaskStatus
-    template_name = "delete.html"
     success_url = reverse_lazy('statuses:obj_list')
-    redirect_url = reverse_lazy('login')
     success_message = txt.DELETE_STATUS_SUCSESS
-    error_message = txt.NOT_LOGGED_IN
     title_text = txt.DELETE_STATUS_TITLE
-    btn_text = txt.DELETE_BTN
-
-    def form_valid(self, form):
-        try:
-            return super().form_valid(form)
-        except models.ProtectedError:
-            from django.shortcuts import HttpResponseRedirect
-            from django.contrib import messages
-            self.error_message = txt.STATUS_IN_USE
-            self.redirect_url = reverse_lazy('statuses:obj_list')
-            messages.error(self.request, self.error_message)
-            return HttpResponseRedirect(self.redirect_url)
+    in_use_text = txt.STATUS_IN_USE
