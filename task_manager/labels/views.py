@@ -1,5 +1,5 @@
 from .models import Label
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 from .forms import LabelCreateForm
 import task_manager.text_constants as txt
@@ -17,28 +17,30 @@ common_attr = {
     'error_message': txt.NOT_LOGGED_IN,
 }
 
+list_view_attr = {
+    'model': Label,
+    'app_name': 'labels',
+    'title': txt.LABEL_LIST_TITLE,
+    'new_obj_text': txt.LABEL_LIST_NEW,
+}
+
+create_view_attr = {
+    'success_message': txt.CREATE_LABEL_SUCSESS,
+    'title_text': txt.CREATE_LABEL_TITLE,
+    'btn_text': txt.CREATE_BTN,
+}
+create_view_attr.update(common_attr)
+
+update_view_attr = {
+    'success_message': txt.UPDATE_LABEL_SUCSESS,
+    'title_text': txt.UPDATE_LABEL_TITLE,
+    'btn_text': txt.UPDATE_BTN,
+}
+update_view_attr.update(common_attr)
+
 
 # Create your views here.
-class ObjectListView(CO.CustomListView):
-
-    model = Label
-    app_name = 'labels'
-    title = txt.LABEL_LIST_TITLE
-    new_obj_text = txt.LABEL_LIST_NEW
-
-
-class ObjectCreateView(CO.CustomEditView, CreateView):
-
-    success_message = txt.CREATE_LABEL_SUCSESS
-    title_text = txt.CREATE_LABEL_TITLE
-    btn_text = txt.CREATE_BTN
-
-
-class ObjectUpdateView(CO.CustomEditView, UpdateView):
-
-    success_message = txt.UPDATE_LABEL_SUCSESS
-    title_text = txt.UPDATE_LABEL_TITLE
-    btn_text = txt.UPDATE_BTN
+# Re-using the List, Create and Update views from statuses
 
 
 class ObjectDeleteView(CO.CustomEditView, DeleteView):
