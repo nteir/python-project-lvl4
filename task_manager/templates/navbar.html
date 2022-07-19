@@ -33,7 +33,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">{% translate 'Log out' %}</a>
+                    <a class="nav-link" href="{% url 'logout' %}">{% translate 'Log out' context 'hexlet logout' %}</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
