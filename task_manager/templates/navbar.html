@@ -33,14 +33,14 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">{% translate 'Log out' context 'hexlet logout' %}</a>
+                    <a class="nav-link" href="{% url 'logout' %}">{% translate 'Log out' context 'navbar logout' %}</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'login' %}">{% translate 'Sign in' %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'signup' %}">{% translate 'Sign up' %}</a>
+                    <a class="nav-link" href="{% url 'signup' %}">{% translate 'Sign up' context 'navbar signup' %}</a>
                 </li>
                 {% endif %}
             </ul>

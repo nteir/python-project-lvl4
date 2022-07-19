@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-19 09:44+0300\n"
+"POT-Creation-Date: 2022-07-19 10:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -134,11 +134,12 @@ msgid "Statuses"
 msgstr "Статусы"
 
 #: task_manager/templates/navbar.html:36
-msgctxt "hexlet logout"
+msgctxt "navbar logout"
 msgid "Log out"
 msgstr "Выход"
 
-#: task_manager/templates/navbar.html:43 task_manager/text_constants.py:20
+#: task_manager/templates/navbar.html:43
+msgctxt "navbar signup"
 msgid "Sign up"
 msgstr "Регистрация"
 
@@ -209,6 +210,11 @@ msgstr "Изменение метки"
 #: task_manager/text_constants.py:18
 msgid "Delete label"
 msgstr "Удаление метки"
+
+#: task_manager/text_constants.py:20
+msgctxt "signup btn"
+msgid "Sign up"
+msgstr "Зарегистрировать"
 
 #: task_manager/text_constants.py:22
 msgid "Yes, delete"

@@ -1,4 +1,4 @@
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext as _, pgettext
 
 # Context elements
 SIGNUP_TITLE = _('New user sign up')
@@ -17,7 +17,7 @@ CREATE_LABEL_TITLE = _('Create label')
 UPDATE_LABEL_TITLE = _('Update label')
 DELETE_LABEL_TITLE = _('Delete label')
 
-SIGNUP_BTN = _('Sign up')
+SIGNUP_BTN = pgettext('signup btn', 'Sign up')
 UPDATE_BTN = _('Update')
 DELETE_BTN = _('Yes, delete')
 CREATE_BTN = _('Create')
