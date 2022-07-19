@@ -8,7 +8,7 @@ import task_manager.text_constants as txt
 class TaskFilter(django_filters.FilterSet):
 
     label_set = Label.objects.values_list('id', 'name').all()
-    labels = django_filters.filters.ChoiceFilter(choices=label_set)
+    labels = django_filters.filters.ChoiceFilter(label=txt.FILTER_LABEL, choices=label_set)
 
     self_tasks = django_filters.filters.BooleanFilter(
         label=txt.FILTER_MY_TASKS,

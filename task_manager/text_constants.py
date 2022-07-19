@@ -24,6 +24,7 @@ CREATE_BTN = _('Create')
 
 FILTER_BTN = _('Show')
 FILTER_MY_TASKS = _('Only my tasks')
+FILTER_LABEL = _('Label')
 
 STATUS_LIST_TITLE = _('Statuses')
 STATUS_LIST_NEW = _('New status')
