@@ -1,11 +1,8 @@
 from django.urls import path
 from task_manager.labels import views
 from task_manager.statuses import views as statuses_views
-# from task_manager.custom_objects import get_path_arguments
 
 app_name = 'labels'
-# arguments = get_path_arguments(views)
-# urlpatterns = [path(*a, **k) for a, k in arguments]
 
 urlpatterns = [
     path('', statuses_views.ObjectListView.as_view(**views.list_view_attr), name='obj_list'),
