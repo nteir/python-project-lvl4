@@ -79,36 +79,3 @@ class CustomDeleteView(CustomEditView, DeleteView):
             self.redirect_url = self.success_url
             messages.error(self.request, self.error_message)
             return HttpResponseRedirect(self.redirect_url)
-
-
-def get_path_arguments(module):
-    """
-    Arguments to generate urlpatterns for
-    List, Create, Update, Delete views,
-    common for statuses, labels and tasks.
-    """
-    args = [
-        [
-            '',
-            module.ObjectListView.as_view(),
-        ],
-        [
-            'create/',
-            module.ObjectCreateView.as_view(**module.common_attr),
-        ],
-        [
-            '<int:pk>/update/',
-            module.ObjectUpdateView.as_view(**module.common_attr),
-        ],
-        [
-            '<int:pk>/delete/',
-            module.ObjectDeleteView.as_view(),
-        ],
-    ]
-    kwargs = [
-        {'name': 'obj_list', },
-        {'name': 'obj_create', },
-        {'name': 'obj_update', },
-        {'name': 'obj_delete', },
-    ]
-    return list(zip(args, kwargs))
