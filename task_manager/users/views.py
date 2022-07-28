@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import HttpResponseRedirect
 from .forms import SignUpForm, LoginForm
 import task_manager.text_constants as txt
 from django.db import models
@@ -72,7 +73,6 @@ class UserDeleteView(CO.CustomEditView, UserPassesTestMixin, DeleteView):
         try:
             return super().form_valid(form)
         except models.ProtectedError:
-            from django.shortcuts import HttpResponseRedirect
             self.error_message = txt.USER_IN_USE
             self.redirect_url = reverse_lazy('users:users')
             messages.error(self.request, self.error_message)

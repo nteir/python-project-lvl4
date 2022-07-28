@@ -3,6 +3,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
 from django.views.generic.edit import DeleteView
+from django.shortcuts import HttpResponseRedirect
 from django.contrib import messages
 from django.db import models
 from django.shortcuts import redirect
@@ -74,8 +75,6 @@ class CustomDeleteView(CustomEditView, DeleteView):
         try:
             return super().form_valid(form)
         except models.ProtectedError:
-            from django.shortcuts import HttpResponseRedirect
-            from django.contrib import messages
             self.error_message = self.in_use_text
             self.redirect_url = self.success_url
             messages.error(self.request, self.error_message)
