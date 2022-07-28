@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_filters',
     'task_manager',
+    'task_manager.users',
     'task_manager.statuses',
     'task_manager.tasks',
     'task_manager.labels',
@@ -127,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGIN_REDIRECT_URL = 'home'
 
-AUTH_USER_MODEL = 'task_manager.User'
+AUTH_USER_MODEL = 'users.User'
 
 
 # Internationalization

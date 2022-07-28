@@ -16,24 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from task_manager import views
+from task_manager.users import views as users_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HomeView.as_view(), name='home'),
-    path('users/', views.UsersView.as_view(), name='users'),
-    path('users/create/', views.UserCreateView.as_view(), name='signup'),
-    path(
-        'users/<int:pk>/update/',
-        views.UserUpdateView.as_view(),
-        name='update'
-    ),
-    path(
-        'users/<int:pk>/delete/',
-        views.UserDeleteView.as_view(),
-        name='delete'
-    ),
-    path('login/', views.UserLoginView.as_view(), name='login'),
-    path('logout/', views.UserLogoutView.as_view(), name='logout'),
+    path('login/', users_views.UserLoginView.as_view(), name='login'),
+    path('logout/', users_views.UserLogoutView.as_view(), name='logout'),
+    path('users/', include('task_manager.users.urls')),
     path('statuses/', include('task_manager.statuses.urls')),
     path('tasks/', include('task_manager.tasks.urls')),
     path('labels/', include('task_manager.labels.urls')),

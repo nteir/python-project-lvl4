@@ -16,7 +16,7 @@ class UsersTestCase(TestCase):
         self.user_list = [self.user1, self.user2, self.user3]
 
     def test_users_view(self):
-        response = self.client.get(reverse('users'))
+        response = self.client.get(reverse('users:users'))
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(response.context['users'], self.user_list)
 
@@ -28,7 +28,7 @@ class UsersTestCase(TestCase):
             'password1': 'qwerty',
             'password2': 'qwerty',
         }
-        url = reverse('signup')
+        url = reverse('users:signup')
         response = self.client.post(url, new_data, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(User.objects.filter(username='tuser').count(), 1)
@@ -36,7 +36,7 @@ class UsersTestCase(TestCase):
     def test_user_update(self):
         user = self.user1
         self.client.force_login(user)
-        url = reverse('update', kwargs={'pk': user.id})
+        url = reverse('users:update', kwargs={'pk': user.id})
         new_data = {
             'first_name': user.first_name,
             'last_name': 'Sidorov',
@@ -45,15 +45,15 @@ class UsersTestCase(TestCase):
             'password2': user.password,
         }
         response = self.client.post(url, new_data, follow=True)
-        self.assertRedirects(response, reverse('users'))
+        self.assertRedirects(response, reverse('users:users'))
         self.assertEqual(User.objects.filter(last_name='Sidorov').count(), 1)
 
     def test_user_delete(self):
         user = self.user1
         self.client.force_login(user)
-        url = reverse('delete', kwargs={'pk': user.id})
+        url = reverse('users:delete', kwargs={'pk': user.id})
         response = self.client.post(url, follow=True)
         self.assertEqual(User.objects.filter(id=self.user1.id).count(), 0)
         with self.assertRaises(User.DoesNotExist):
             User.objects.get(pk=self.user1.id)
-        self.assertRedirects(response, reverse('users'))
+        self.assertRedirects(response, reverse('users:users'))
