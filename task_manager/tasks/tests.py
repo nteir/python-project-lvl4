@@ -13,10 +13,10 @@ class TasksTestCase(CO.CustomTestCase):
     inherited from CO.CustomTestCase
     """
     fixtures = [
-        'tasks/tasks.json',
-        'tasks/task_label_rel.json',
-        'statuses/statuses.json',
-        'labels/labels.json',
+        'tasks.json',
+        'task_label_rel.json',
+        'statuses.json',
+        'labels.json',
         'users.json',
     ]
 

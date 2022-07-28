@@ -12,7 +12,7 @@ class StatusesTestCase(CO.CustomTestCase):
     List, Create and Update tests are
     inherited from CO.CustomTestCase
     """
-    fixtures = ['statuses/statuses.json', 'users.json']
+    fixtures = ['statuses.json', 'users.json']
 
     def setUp(self):
         self.user = User.objects.get(pk=1)
